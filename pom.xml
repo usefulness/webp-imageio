@@ -3,11 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.sejda.imageio</groupId>
+    <groupId>org.gotson</groupId>
     <artifactId>webp-imageio</artifactId>
     <packaging>jar</packaging>
     <name>webp-imageio</name>
-    <version>0.1.7-SNAPSHOT</version>
+    <version>0.2.0</version>
 
     <issueManagement>
         <system>GitHub</system>
