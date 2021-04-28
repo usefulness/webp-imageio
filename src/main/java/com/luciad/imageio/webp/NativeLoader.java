@@ -304,9 +304,9 @@ public class NativeLoader {
      */
     public static String getVersion() {
 
-        URL versionFile = NativeLoader.class.getResource("/META-INF/maven/org.sejda.imageio/webp-imageio/pom.properties");
+        URL versionFile = NativeLoader.class.getResource("/META-INF/maven/com.github.gotson/webp-imageio/pom.properties");
         if (versionFile == null) {
-            versionFile = NativeLoader.class.getResource("/META-INF/maven/org.sejda.imageio/webp-imageio/VERSION");
+            versionFile = NativeLoader.class.getResource("/META-INF/maven/com.github.gotson/webp-imageio/VERSION");
         }
 
         String version = "unknown";
