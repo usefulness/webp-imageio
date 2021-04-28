@@ -168,6 +168,8 @@ public class OSInfo {
             if (armType.startsWith("armv6")) {
                 // Raspberry PI
                 return "armv6";
+            } else if (armType.startsWith("armv7l")) {
+                return "armv7l";
             } else if (armType.startsWith("armv7")) {
                 // Generic
                 return "armv7";
