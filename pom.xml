@@ -7,7 +7,7 @@
     <artifactId>webp-imageio</artifactId>
     <packaging>jar</packaging>
     <name>webp-imageio</name>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
 
     <issueManagement>
         <system>GitHub</system>
