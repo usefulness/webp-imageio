@@ -1,0 +1,13 @@
+plugins {
+    id("com.starter.library.kotlin")
+    id("com.starter.publishing")
+}
+
+tasks.named("test") {
+    useJUnitPlatform()
+}
+
+dependencies {
+    testImplementation("org.assertj:assertj-core:3.23.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+}
