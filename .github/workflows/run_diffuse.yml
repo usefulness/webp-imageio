@@ -1,0 +1,73 @@
+name: Diffuse
+
+on:
+  pull_request:
+    branches:
+      - master
+      - main
+      - trunk
+      - develop
+      - maine
+      - mane
+
+jobs:
+  run-diffuse:
+    env:
+      github_token: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - uses: gradle/gradle-build-action@v2
+
+      - run: ./gradlew assembleRelease
+
+      - run: find . -regex ".*issuechecker/build/libs/issuechecker-[0-9SNAPSHOT\.-]*\.jar" -print | xargs -n 1 -I % cp % pull-request-artifact.jar
+        shell: bash
+
+      - uses: actions/cache@v3
+        name: Download base
+        with:
+          path: |
+            diffuse-source-file-release
+          key: diffuse-${{ github.event.pull_request.base.sha }}
+          restore-keys: diffuse-${{ github.event.pull_request.base.sha }}
+
+      - id: diffuse
+        uses: usefulness/diffuse-action@v1
+        with:
+          old-file-path: diffuse-source-file-release
+          new-file-path: pull-request-artifact.jar
+
+      - uses: peter-evans/find-comment@v2
+        id: find_comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-includes: Diffuse output
+
+      - uses: peter-evans/create-or-update-comment@v2
+        if: ${{ steps.diffuse.outputs.diff-gh-comment != null || steps.find_comment.outputs.comment-id != null }}
+        with:
+          body: |
+            ### Jar size:
+            Jar size change: ${{ steps.diffuse.outputs.size-diff-comment_style_1 }}
+            ### Diffuse output:
+            ${{ steps.diffuse.outputs.diff-gh-comment }}
+          edit-mode: replace
+          comment-id: ${{ steps.find_comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: diffuse-output
+          path: ${{ steps.diffuse.outputs.diff-file }}

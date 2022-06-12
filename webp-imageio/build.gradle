@@ -1,5 +1,6 @@
 plugins {
     id("com.starter.library.kotlin")
+    id("com.starter.publishing")
 }
 
 tasks.named("test") {
@@ -7,6 +8,6 @@ tasks.named("test") {
 }
 
 dependencies {
-    testImplementation "org.assertj:assertj-core:3.22.0"
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    testImplementation("org.assertj:assertj-core:3.23.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
 }

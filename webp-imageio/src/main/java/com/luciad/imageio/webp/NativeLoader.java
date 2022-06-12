@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * The library files are automatically extracted from this project's package
  * (JAR).
- * <p/>
+ *
  * usage: call {@link #initialize()} before using the library.
  *
  * @author leo
@@ -269,7 +269,7 @@ public class NativeLoader {
 
         extracted = false;
         throw new Exception(String.format("No native library found for os.name=%s, os.arch=%s, paths=[%s]",
-            OSInfo.getOSName(), OSInfo.getArchName(), StringUtils.join(triedPaths, File.pathSeparator)));
+                OSInfo.getOSName(), OSInfo.getArchName(), StringUtils.join(triedPaths, File.pathSeparator)));
     }
 
     private static boolean hasResource(String path) {
