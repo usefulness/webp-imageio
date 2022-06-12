@@ -7,6 +7,15 @@ tasks.named("test") {
     useJUnitPlatform()
 }
 
+tasks.withType(JavaCompile).configureEach {
+    options.release.set(JavaVersion.VERSION_1_8.majorVersion.toInteger())
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(JavaVersion.VERSION_17.toString())
+    }
+}
+
 dependencies {
     testImplementation("org.assertj:assertj-core:3.23.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
