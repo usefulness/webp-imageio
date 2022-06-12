@@ -29,9 +29,9 @@ jobs:
 
       - uses: gradle/gradle-build-action@v2
 
-      - run: ./gradlew assembleRelease
+      - run: ./gradlew assemble
 
-      - run: find . -regex ".*issuechecker/build/libs/issuechecker-[0-9SNAPSHOT\.-]*\.jar" -print | xargs -n 1 -I % cp % pull-request-artifact.jar
+      - run: find . -regex ".*webp-imageio/build/libs/webp-imageio-[0-9SNAPSHOT\.-]*\.jar" -print | xargs -n 1 -I % cp % pull-request-artifact.jar
         shell: bash
 
       - uses: actions/cache@v3
