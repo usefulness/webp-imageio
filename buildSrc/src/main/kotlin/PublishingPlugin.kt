@@ -50,7 +50,7 @@ class PublishingPlugin : Plugin<Project> {
                     publication.from(components.getByName("java"))
                     publication.pom { pom ->
                         pom.name.set("${project.group}:${project.name}")
-                        pom.description.set("A tool that scans sources for all resolved lisks to public trackers")
+                        pom.description.set("Java ImageIO WebP support")
                         pom.url.set("https://github.com/usefulness/webp-imageio")
                         pom.licenses { licenses ->
                             licenses.license { license ->
@@ -82,7 +82,7 @@ class PublishingPlugin : Plugin<Project> {
         }
 
         extensions.configure<SigningExtension>("signing") { signing ->
-//            signing.sign(extensions.getByType(PublishingExtension::class.java).publications)
+            signing.sign(extensions.getByType(PublishingExtension::class.java).publications)
         }
     }
 
