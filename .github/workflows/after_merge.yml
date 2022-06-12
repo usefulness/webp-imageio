@@ -56,3 +56,16 @@ jobs:
 
       - run: find . -regex ".*webp-imageio/build/libs/webp-imageio-[0-9SNAPSHOT\.-]*\.jar" -print | xargs -n 1 -I % cp % diffuse-source-file
         shell: bash
+
+      - run: find . -regex ".*webp-imageio/build/libs/webp-imageio-[0-9SNAPSHOT\.-]*\.jar" -print
+        shell: bash
+
+      - run: ls -l webp-imageio/build/libs
+        shell: bash
+
+      - run: ls -l
+        shell: bash
+
+      - name: Check size
+        run: du -h pull-request-artifact.jar
+        shell: bash
