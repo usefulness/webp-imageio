@@ -42,14 +42,14 @@ jobs:
         name: Download base
         with:
           path: |
-            diffuse-source-file-release
+            diffuse-source-file
           key: diffuse-${{ github.event.pull_request.base.sha }}
           restore-keys: diffuse-${{ github.event.pull_request.base.sha }}
 
       - id: diffuse
         uses: usefulness/diffuse-action@v1
         with:
-          old-file-path: diffuse-source-file-release
+          old-file-path: diffuse-source-file
           new-file-path: pull-request-artifact.jar
 
       - uses: peter-evans/find-comment@v2
