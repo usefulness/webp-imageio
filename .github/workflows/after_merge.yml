@@ -51,21 +51,12 @@ jobs:
       - uses: actions/cache@v3
         name: Upload base (release)
         with:
-          path: diffuse-source-file-release
+          path: diffuse-source-file
           key: diffuse-${{ github.sha }}
 
       - run: find . -regex ".*webp-imageio/build/libs/webp-imageio-[0-9SNAPSHOT\.-]*\.jar" -print | xargs -n 1 -I % cp % diffuse-source-file
         shell: bash
 
-      - run: find . -regex ".*webp-imageio/build/libs/webp-imageio-[0-9SNAPSHOT\.-]*\.jar" -print
-        shell: bash
-
-      - run: ls -l webp-imageio/build/libs
-        shell: bash
-
-      - run: ls -l
-        shell: bash
-
       - name: Check size
-        run: du -h pull-request-artifact.jar
+        run: du -h diffuse-source-file
         shell: bash
