@@ -48,8 +48,6 @@ jobs:
           SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
         run: ./gradlew publishMavenJavaPublicationToGithubRepository | true
 
-      - run: ./gradlew assemble projectCoverage
-
       - uses: actions/cache@v3
         name: Upload base (release)
         with:
