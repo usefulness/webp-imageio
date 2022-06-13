@@ -4,14 +4,9 @@
 
 This contains only pre-compiled binaries
 
-# Changes
-- 
-
 # Supported platforms
 
-- windows (32, 64 bit)
-- linux (64 bit)
-- mac (64 bit, arm)
+See the [full list](https://github.com/usefulness/webp-imageio/tree/master/webp-imageio/src/main/resources/native) of supported platforms
 
 --------------
 
