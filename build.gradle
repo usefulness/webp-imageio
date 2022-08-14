@@ -1,5 +1,5 @@
 plugins {
-    id 'com.starter.config' version '0.49.0'
+    id 'com.starter.config' version '0.50.0'
     id 'com.starter.versioning' version '0.49.0'
     id 'com.starter.library.kotlin' version '0.49.0' apply(false)
 }
