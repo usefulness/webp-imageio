@@ -20,16 +20,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: set up JDK
-        uses: actions/setup-java@v3
+      - name: Write Gradle build properties to `~/.gradle/gradle.properties`
+        run: |
+          mkdir -p ~/.gradle
+          printf "org.gradle.jvmargs=-Xmx3G -XX:+UseParallelGC\n" >> ~/.gradle/gradle.properties
+        shell: bash
+
+      - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: 17
 
       - uses: gradle/gradle-build-action@v2
 
-      - name: Gradle Wrapper Validation
-        uses: gradle/wrapper-validation-action@v1
+      - uses: gradle/wrapper-validation-action@v1
 
       - run: ./gradlew projectCodestyle -x checkstyle
 

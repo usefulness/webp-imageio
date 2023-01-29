@@ -1,7 +1,7 @@
 plugins {
-    id 'com.starter.config' version '0.56.1'
-    id 'com.starter.versioning' version '0.54.0'
-    id 'com.starter.library.kotlin' version '0.56.1' apply(false)
+    alias(libs.plugins.starter.config)
+    alias(libs.plugins.starter.versioning)
+    alias(libs.plugins.osacky.doctor)
 }
 
 commonConfig {
