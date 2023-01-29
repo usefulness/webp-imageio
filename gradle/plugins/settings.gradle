@@ -1,11 +1,6 @@
 import org.gradle.api.initialization.resolve.RepositoriesMode
 
 pluginManagement {
-    repositories { // https://github.com/gradle/gradle/issues/20866
-        gradlePluginPortal()
-        mavenCentral()
-        google()
-    }
     dependencyResolutionManagement {
         repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
         repositories {
@@ -15,20 +10,17 @@ pluginManagement {
     }
 }
 
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.4.0"
-}
-
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
     }
+    versionCatalogs {
+        create("libs") {
+            from(files("../libs.versions.toml"))
+        }
+    }
 }
 
-rootProject.name = "com.github.usefulness"
-
-include("webp-imageio")
-
-includeBuild("gradle/plugins")
+rootProject.name = "plugins"

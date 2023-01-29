@@ -1,12 +1,13 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 
 plugins {
+    id("java-gradle-plugin")
     alias(libs.plugins.starter.library.kotlin)
-    id("com.starter.publishing")
+    alias(libs.plugins.osacky.doctor)
 }
 
-tasks.withType(Test).configureEach {
-    useJUnitPlatform()
+kotlin {
+    jvmToolchain(17)
 }
 
 def targetJavaVersion = JavaVersion.VERSION_1_8
@@ -17,12 +18,11 @@ tasks.withType(KotlinCompile).configureEach {
     kotlinOptions.jvmTarget = targetJavaVersion
 }
 
-kotlin {
-    jvmToolchain(17)
-}
-
-dependencies {
-    testImplementation(libs.assertj.core)
-    testRuntimeOnly(libs.junit.jupiter.engine)
-    testImplementation(libs.junit.jupiter.api)
+gradlePlugin {
+    plugins {
+        publishingPlugin {
+            id = 'com.starter.publishing'
+            implementationClass = 'PublishingPlugin'
+        }
+    }
 }
