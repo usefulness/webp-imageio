@@ -35,7 +35,7 @@ jobs:
 
       - uses: gradle/wrapper-validation-action@v1
 
-      - run: ./gradlew projectCodestyle -x checkstyle
+      - run: ./gradlew projectCodestyle
 
       - run: ./gradlew assemble
 
