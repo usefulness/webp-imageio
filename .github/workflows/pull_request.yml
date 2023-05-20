@@ -29,14 +29,14 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: 17
+          java-version: 20
 
       - uses: gradle/gradle-build-action@v2
 
       - uses: gradle/wrapper-validation-action@v1
 
-      - run: ./gradlew projectCodestyle
+      - run: ./gradlew projectCodestyle --scan
 
-      - run: ./gradlew assemble
+      - run: ./gradlew assemble --scan
 
-      - run: ./gradlew projectCoverage
+      - run: ./gradlew projectCoverage --scan
