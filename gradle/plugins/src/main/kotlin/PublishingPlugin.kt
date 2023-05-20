@@ -10,7 +10,9 @@ class PublishingPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = with(target) {
         pluginManager.apply("maven-publish")
-        pluginManager.apply("signing")
+        if (findConfig("SIGNING_PASSWORD").isNotEmpty()) {
+            pluginManager.apply("signing")
+        }
 
         extensions.configure<JavaPluginExtension> {
             withSourcesJar()
@@ -74,15 +76,16 @@ class PublishingPlugin : Plugin<Project> {
                 }
             }
         }
+        pluginManager.withPlugin("signing") {
+            with(extensions.extraProperties) {
+                set("signing.keyId", findConfig("SIGNING_KEY_ID"))
+                set("signing.password", findConfig("SIGNING_PASSWORD"))
+                set("signing.secretKeyRingFile", findConfig("SIGNING_SECRET_KEY_RING_FILE"))
+            }
 
-        with(extensions.extraProperties) {
-            set("signing.keyId", findConfig("SIGNING_KEY_ID"))
-            set("signing.password", findConfig("SIGNING_PASSWORD"))
-            set("signing.secretKeyRingFile", findConfig("SIGNING_SECRET_KEY_RING_FILE"))
-        }
-
-        extensions.configure<SigningExtension>("signing") { signing ->
-            signing.sign(extensions.getByType(PublishingExtension::class.java).publications)
+            extensions.configure<SigningExtension>("signing") { signing ->
+                signing.sign(extensions.getByType(PublishingExtension::class.java).publications)
+            }
         }
     }
 
