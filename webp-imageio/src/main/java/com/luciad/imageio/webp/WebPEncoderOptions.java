@@ -220,6 +220,14 @@ public class WebPEncoderOptions {
     setLowMemory( fPointer, aLowMemory ? 1 : 0 );
   }
 
+  public boolean getUseSharpYUV() {
+   return getUseSharpYUV( fPointer ) != 0;
+  }
+
+  public void setUseSharpYUV( boolean aUseSharpYUV ) {
+    setUseSharpYUV( fPointer, aUseSharpYUV ? 1 : 0);
+  }
+
   private static native float getQuality( long aPointer );
 
   private static native void setQuality( long aPointer, float aQuality );
