@@ -25,8 +25,8 @@ public class WebPWriteParam extends ImageWriteParam {
   private final boolean fDefaultLossless;
   private WebPEncoderOptions fOptions;
 
-  public WebPWriteParam( Locale aLocale ) {
-    super( aLocale );
+  public WebPWriteParam(Locale aLocale) {
+    super(aLocale);
     fOptions = new WebPEncoderOptions();
     fDefaultLossless = fOptions.isLossless();
     canWriteCompressed = true;
@@ -45,17 +45,17 @@ public class WebPWriteParam extends ImageWriteParam {
   }
 
   @Override
-  public void setCompressionQuality( float quality ) {
-    super.setCompressionQuality( quality );
-    fOptions.setCompressionQuality( quality * 100f );
+  public void setCompressionQuality(float quality) {
+    super.setCompressionQuality(quality);
+    fOptions.setCompressionQuality(quality * 100f);
   }
 
   @Override
-  public void setCompressionType( String compressionType ) {
-    super.setCompressionType( compressionType );
-    for ( int i = 0; i < compressionTypes.length; i++ ) {
-      if ( compressionTypes[i].equals( compressionType ) ) {
-        fOptions.setLossless( i == LOSSLESS_COMPRESSION );
+  public void setCompressionType(String compressionType) {
+    super.setCompressionType(compressionType);
+    for (int i = 0; i < compressionTypes.length; i++) {
+      if (compressionTypes[i].equals(compressionType)) {
+        fOptions.setLossless(i == LOSSLESS_COMPRESSION);
         break;
       }
     }
@@ -65,7 +65,7 @@ public class WebPWriteParam extends ImageWriteParam {
   @Override
   public void unsetCompression() {
     super.unsetCompression();
-    fOptions.setLossless( fDefaultLossless );
+    fOptions.setLossless(fDefaultLossless);
   }
 
   public void setSnsStrength(int aSnsStrength) {
@@ -228,9 +228,13 @@ public class WebPWriteParam extends ImageWriteParam {
     fOptions.setPreprocessing(aPreprocessing);
   }
 
-  public void setUseSharpYUV(boolean aUseSharpYUV) { fOptions.setUseSharpYUV(aUseSharpYUV); }
+  public void setUseSharpYUV(boolean aUseSharpYUV) {
+    fOptions.setUseSharpYUV(aUseSharpYUV);
+  }
 
-  public boolean getUseSharpYUV() { return fOptions.getUseSharpYUV(); }
+  public boolean getUseSharpYUV() {
+    return fOptions.getUseSharpYUV();
+  }
 
   WebPEncoderOptions getEncoderOptions() {
     return fOptions;
