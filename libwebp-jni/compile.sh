@@ -20,5 +20,5 @@ elif [ "$1" == "Mac" ]; then
   LIB="libwebp-imageio.dylib"
 fi
 
-mkdir -p ../webp-imageio/src/main/resources/native/$1/$2/
-cp build/$1/$2/src/main/c/${LIB} ../webp-imageio/src/main/resources/native/$1/$2/
+mkdir -p build/native/$1/$2/
+cp build/$1/$2/src/main/c/${LIB} build/native/$1/$2/
