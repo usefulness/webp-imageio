@@ -315,4 +315,8 @@ public class WebPEncoderOptions {
   private static native int getLowMemory( long aPointer );
 
   private static native void setLowMemory( long aPointer, int aLowMemory );
+
+  private static native int getUseSharpYUV( long aPointer );
+
+  private static native void setUseSharpYUV( long aPointer, int aUseSharpYUV );
 }
