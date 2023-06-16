@@ -228,6 +228,10 @@ public class WebPWriteParam extends ImageWriteParam {
     fOptions.setPreprocessing(aPreprocessing);
   }
 
+  public void setUseSharpYUV(boolean aUseSharpYUV) { fOptions.setUseSharpYUV(aUseSharpYUV); }
+
+  public boolean getUseSharpYUV() { return fOptions.getUseSharpYUV(); }
+
   WebPEncoderOptions getEncoderOptions() {
     return fOptions;
   }
