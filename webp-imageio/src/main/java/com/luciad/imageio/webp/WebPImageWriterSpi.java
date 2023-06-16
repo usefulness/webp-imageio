@@ -38,12 +38,12 @@ public class WebPImageWriterSpi extends ImageWriterSpi {
     super(
         "Luciad",
         "1.0",
-        new String[]{ "WebP", "webp" },
-        new String[]{ "webp" },
-        new String[]{ "image/webp" },
+        new String[]{"WebP", "webp"},
+        new String[]{"webp"},
+        new String[]{"image/webp"},
         WebPReader.class.getName(),
-        new Class[]{ ImageOutputStream.class },
-        new String[]{ WebPImageReaderSpi.class.getName() },
+        new Class[]{ImageOutputStream.class},
+        new String[]{WebPImageReaderSpi.class.getName()},
         false,
         null,
         null,
@@ -58,38 +58,37 @@ public class WebPImageWriterSpi extends ImageWriterSpi {
   }
 
   @Override
-  public boolean canEncodeImage( ImageTypeSpecifier type ) {
+  public boolean canEncodeImage(ImageTypeSpecifier type) {
     ColorModel colorModel = type.getColorModel();
     SampleModel sampleModel = type.getSampleModel();
     int transferType = sampleModel.getTransferType();
 
-    if ( colorModel instanceof ComponentColorModel ) {
-      if ( !( sampleModel instanceof ComponentSampleModel ) ) {
+    if (colorModel instanceof ComponentColorModel) {
+      if (!(sampleModel instanceof ComponentSampleModel)) {
         return false;
       }
 
-      if ( transferType != DataBuffer.TYPE_BYTE && transferType != DataBuffer.TYPE_INT ) {
+      if (transferType != DataBuffer.TYPE_BYTE && transferType != DataBuffer.TYPE_INT) {
         return false;
       }
-    }
-    else if ( colorModel instanceof DirectColorModel ) {
-      if ( !( sampleModel instanceof SinglePixelPackedSampleModel ) ) {
+    } else if (colorModel instanceof DirectColorModel) {
+      if (!(sampleModel instanceof SinglePixelPackedSampleModel)) {
         return false;
       }
 
-      if ( transferType != DataBuffer.TYPE_INT ) {
+      if (transferType != DataBuffer.TYPE_INT) {
         return false;
       }
     }
 
     ColorSpace colorSpace = colorModel.getColorSpace();
-    if ( !( colorSpace.isCS_sRGB() ) ) {
+    if (!(colorSpace.isCS_sRGB())) {
       return false;
     }
 
     int[] sampleSize = sampleModel.getSampleSize();
-    for ( int i = 0; i < sampleSize.length; i++ ) {
-      if ( sampleSize[ i ] > 8 ) {
+    for (int i = 0; i < sampleSize.length; i++) {
+      if (sampleSize[i] > 8) {
         return false;
       }
     }
@@ -99,12 +98,12 @@ public class WebPImageWriterSpi extends ImageWriterSpi {
   }
 
   @Override
-  public ImageWriter createWriterInstance( Object extension ) throws IOException {
-    return new WebPWriter( this );
+  public ImageWriter createWriterInstance(Object extension) throws IOException {
+    return new WebPWriter(this);
   }
 
   @Override
-  public String getDescription( Locale locale ) {
+  public String getDescription(Locale locale) {
     return "WebP Writer";
   }
 }

@@ -23,15 +23,15 @@ enum VP8StatusCode {
   VP8_STATUS_UNSUPPORTED_FEATURE,
   VP8_STATUS_SUSPENDED,
   VP8_STATUS_USER_ABORT,
-  VP8_STATUS_NOT_ENOUGH_DATA,;
+  VP8_STATUS_NOT_ENOUGH_DATA,
+  ;
 
   private static VP8StatusCode[] VALUES = values();
 
-  public static VP8StatusCode getStatusCode( int aValue ) {
-    if ( aValue >= 0 && aValue < VALUES.length ) {
-      return VALUES[ aValue ];
-    }
-    else {
+  public static VP8StatusCode getStatusCode(int aValue) {
+    if (aValue >= 0 && aValue < VALUES.length) {
+      return VALUES[aValue];
+    } else {
       return null;
     }
   }
