@@ -3,7 +3,6 @@ gradle-starter = "0.60.1"
 gradle-doctor = "0.8.1"
 maven-junit = "5.9.3"
 maven-assertj = "3.24.2"
-maven-ktlint = "0.48.2"
 maven-commons = "2.13.0"
 
 [libraries]
