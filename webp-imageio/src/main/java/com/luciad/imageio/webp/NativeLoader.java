@@ -284,37 +284,18 @@ public class NativeLoader {
   }
 
   /**
-   * @return The major version of the library.
-   */
-  public static int getMajorVersion() {
-    String[] c = getVersion().split("\\.");
-    return (c.length > 0) ? Integer.parseInt(c[0]) : 1;
-  }
-
-  /**
-   * @return The minor version of the library.
-   */
-  public static int getMinorVersion() {
-    String[] c = getVersion().split("\\.");
-    return (c.length > 1) ? Integer.parseInt(c[1]) : 0;
-  }
-
-  /**
    * @return The version of the library.
    */
   public static String getVersion() {
 
-    URL versionFile = NativeLoader.class.getResource("/META-INF/maven/com.github.gotson/webp-imageio/pom.properties");
-    if (versionFile == null) {
-      versionFile = NativeLoader.class.getResource("/META-INF/maven/com.github.gotson/webp-imageio/VERSION");
-    }
+    URL versionFile = NativeLoader.class.getClassLoader().getResource("version.properties");
 
     String version = "unknown";
     try {
       if (versionFile != null) {
         Properties versionData = new Properties();
         versionData.load(versionFile.openStream());
-        version = versionData.getProperty("version", version);
+        version = versionData.getProperty("webp_imageio_version", version);
         version = version.trim().replaceAll("[^0-9\\.]", "");
       }
     } catch (IOException e) {
@@ -322,5 +303,4 @@ public class NativeLoader {
     }
     return version;
   }
-
 }
