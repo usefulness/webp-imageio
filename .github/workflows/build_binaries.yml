@@ -1,4 +1,4 @@
-name: Build Binaries
+name: Build binaries
 
 on:
   workflow_dispatch:
@@ -30,10 +30,10 @@ jobs:
       - uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.PUBLIC_REPO_TOKEN }}
-          commit-message: "Rebuild binaries for ${{ inputs.libwebp_ref }}"
+          commit-message: "Build libwebp binaries. version ${{ inputs.libwebp_ref }}"
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           delete-branch: true
-          title: "Rebuild binaries for libwebp version ${{ inputs.libwebp_ref }}"
+          title: "Build libwebp binaries, version `${{ inputs.libwebp_ref }}`"
           body: |
-            Rebuild binaries based on https://chromium.googlesource.com/webm/libwebp/+/refs/tags/${{ inputs.libwebp_ref }}
+            Build libwebp binaries, version [${{ inputs.libwebp_ref }}](https://chromium.googlesource.com/webm/libwebp/+/refs/tags/${{ inputs.libwebp_ref }})
