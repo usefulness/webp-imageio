@@ -1,6 +1,7 @@
 package com.luciad.imageio.webp
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 import java.awt.image.BufferedImage
@@ -130,6 +131,54 @@ class WebPTest {
             for (y in 0 until image.height) {
                 assertThat(image.getRGB(x, y)).isEqualTo(decodedImage.getRGB(x, y))
             }
+        }
+    }
+
+    @Test
+    @Disabled("useSharpYUV doesn't make any difference")
+    fun sharpYuv(@TempDir tempDir: Path) {
+        val inputImage = ImageIO.read(getResourceStream("image-subsampling-test.png"))
+        val outputFileWithSharpYuv = tempDir.resolve("output_sharp_yuv.webp").toFile()
+        val outputFileDefault = tempDir.resolve("output_default.webp").toFile()
+
+        val writerWithSharpYuv = imageWriter.apply { output = FileImageOutputStream(outputFileWithSharpYuv) }
+        val writerDefault = imageWriter.apply { output = FileImageOutputStream(outputFileDefault) }
+
+        val writeParamWithSharpYuv = WebPWriteParam(writerWithSharpYuv.locale).apply {
+            useSharpYUV = true
+            compressionMode = ImageWriteParam.MODE_EXPLICIT
+            compressionType = compressionTypes[WebPWriteParam.LOSSY_COMPRESSION]
+            compressionQuality = 0.5f
+        }
+        val writeParamDefault = WebPWriteParam(writerDefault.locale).apply {
+            useSharpYUV = false
+            compressionMode = ImageWriteParam.MODE_EXPLICIT
+            compressionType = compressionTypes[WebPWriteParam.LOSSY_COMPRESSION]
+            compressionQuality = 0.5f
+        }
+
+        writerWithSharpYuv.write(null, IIOImage(inputImage, null, null), writeParamWithSharpYuv)
+        writerDefault.write(null, IIOImage(inputImage, null, null), writeParamDefault)
+
+        val outputImageWithYuv = ImageIO.read(outputFileWithSharpYuv)
+        val outputImageDefault = ImageIO.read(outputFileDefault)
+        assertThat(outputImageWithYuv).isNotNull()
+        assertThat(outputImageWithYuv).usingComparator(::imagesComparator).isNotEqualTo(outputImageDefault)
+        assertThat(outputFileWithSharpYuv.length()).isNotEqualTo(outputFileDefault.length())
+    }
+
+    private fun imagesComparator(img1: BufferedImage, img2: BufferedImage): Int {
+        if (img1.width == img2.width && img1.height == img2.height) {
+            for (x in 0 until img1.width) {
+                for (y in 0 until img1.height) {
+                    if (img1.getRGB(x, y) != img2.getRGB(x, y)) {
+                        return img1.getRGB(x, y) - img2.getRGB(x, y)
+                    }
+                }
+            }
+            return 0
+        } else {
+            error("they are not equal at all 🤷‍")
         }
     }
 }
