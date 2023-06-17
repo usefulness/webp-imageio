@@ -35,6 +35,23 @@ tasks.register("generateVersionProperties") {
     }
 }
 
+[8, 11, 17].forEach { majorVersion ->
+    def jdkTest = tasks.register("testJdk$majorVersion", Test) {
+        javaLauncher = javaToolchains.launcherFor {
+            languageVersion = JavaLanguageVersion.of(majorVersion)
+        }
+
+        description = "Runs the test suite on JDK $majorVersion"
+        group = LifecycleBasePlugin.VERIFICATION_GROUP
+
+        // Copy inputs from normal Test task.
+        def testTask = tasks.getByName("test")
+        classpath = testTask.classpath
+        testClassesDirs = testTask.testClassesDirs
+    }
+    tasks.named("check").configure { dependsOn(jdkTest) }
+}
+
 tasks.named("processResources") {
     dependsOn("generateVersionProperties")
 }

@@ -284,27 +284,11 @@ public class NativeLoader {
   }
 
   /**
-   * @return The major version of the library.
-   */
-  public static int getMajorVersion() {
-    String[] c = getVersion().split("\\.");
-    return (c.length > 0) ? Integer.parseInt(c[0]) : 1;
-  }
-
-  /**
-   * @return The minor version of the library.
-   */
-  public static int getMinorVersion() {
-    String[] c = getVersion().split("\\.");
-    return (c.length > 1) ? Integer.parseInt(c[1]) : 0;
-  }
-
-  /**
    * @return The version of the library.
    */
   public static String getVersion() {
 
-    URL versionFile = NativeLoader.class.getResource("version.properties");
+    URL versionFile = NativeLoader.class.getClassLoader().getResource("version.properties");
 
     String version = "unknown";
     try {
@@ -319,5 +303,4 @@ public class NativeLoader {
     }
     return version;
   }
-
 }
