@@ -304,17 +304,14 @@ public class NativeLoader {
    */
   public static String getVersion() {
 
-    URL versionFile = NativeLoader.class.getResource("/META-INF/maven/com.github.gotson/webp-imageio/pom.properties");
-    if (versionFile == null) {
-      versionFile = NativeLoader.class.getResource("/META-INF/maven/com.github.gotson/webp-imageio/VERSION");
-    }
+    URL versionFile = NativeLoader.class.getResource("version.properties");
 
     String version = "unknown";
     try {
       if (versionFile != null) {
         Properties versionData = new Properties();
         versionData.load(versionFile.openStream());
-        version = versionData.getProperty("version", version);
+        version = versionData.getProperty("webp_imageio_version", version);
         version = version.trim().replaceAll("[^0-9\\.]", "");
       }
     } catch (IOException e) {

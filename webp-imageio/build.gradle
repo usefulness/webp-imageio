@@ -21,6 +21,24 @@ kotlin {
     jvmToolchain(17)
 }
 
+tasks.register("generateVersionProperties") {
+    def projectVersion = version
+    def propertiesFile = new File(sourceSets.main.output.resourcesDir, "version.properties")
+    inputs.property("projectVersion", projectVersion)
+    outputs.file(propertiesFile)
+
+    doLast {
+        propertiesFile.write """
+            |webp_imageio_version = $projectVersion
+            |
+            """.strip().stripMargin()
+    }
+}
+
+tasks.named("processResources") {
+    dependsOn("generateVersionProperties")
+}
+
 dependencies {
     testImplementation(libs.assertj.core)
     testRuntimeOnly(libs.junit.jupiter.engine)
