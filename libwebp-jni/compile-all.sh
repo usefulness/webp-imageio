@@ -11,4 +11,5 @@
 ./dockcross/dockcross-windows-static-x64 bash -c './compile.sh Windows x86_64'
 
 docker run --rm -v $(pwd):/workdir -e CROSS_TRIPLE=x86_64-apple-darwin gotson/crossbuild ./compile.sh Mac x86_64 /workdir/multiarch-darwin.cmake
+docker run --rm -v $(pwd):/workdir -e CROSS_TRIPLE=arm64-apple-darwin gotson/crossbuild ./compile.sh Mac aarch64 /workdir/multiarch-darwin.cmake
 cp -r build/native ../webp-imageio/src/main/resources/
