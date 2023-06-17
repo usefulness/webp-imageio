@@ -137,7 +137,7 @@ class WebPTest {
     @Test
     @Disabled("useSharpYUV doesn't make any difference")
     fun sharpYuv(@TempDir tempDir: Path) {
-        val inputImage = ImageIO.read(getResourceStream("image-subsampling-test.png"))
+        val inputImage = ImageIO.read(getResourceStream("test4.png"))
         val outputFileWithSharpYuv = tempDir.resolve("output_sharp_yuv.webp").toFile()
         val outputFileDefault = tempDir.resolve("output_default.webp").toFile()
 
@@ -148,13 +148,13 @@ class WebPTest {
             useSharpYUV = true
             compressionMode = ImageWriteParam.MODE_EXPLICIT
             compressionType = compressionTypes[WebPWriteParam.LOSSY_COMPRESSION]
-            compressionQuality = 0.5f
+            compressionQuality = 0.95f
         }
         val writeParamDefault = WebPWriteParam(writerDefault.locale).apply {
             useSharpYUV = false
             compressionMode = ImageWriteParam.MODE_EXPLICIT
             compressionType = compressionTypes[WebPWriteParam.LOSSY_COMPRESSION]
-            compressionQuality = 0.5f
+            compressionQuality = 0.95f
         }
 
         writerWithSharpYuv.write(null, IIOImage(inputImage, null, null), writeParamWithSharpYuv)
