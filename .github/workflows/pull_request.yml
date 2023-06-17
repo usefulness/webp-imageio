@@ -11,8 +11,11 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -42,3 +45,13 @@ jobs:
       - run: ./gradlew check --scan
 
       - run: ./gradlew projectCoverage --scan
+
+      - run: ./gradlew publishToMavenLocal
+
+      - run: git diff --exit-code
+
+      - uses: actions/upload-artifact@v3
+        if: ${{ always() }}
+        with:
+          name: test-results-${{ matrix.os }}
+          path: "${{ github.workspace }}/**/build/reports"
