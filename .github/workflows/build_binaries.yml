@@ -1,0 +1,39 @@
+name: Build Binaries
+
+on:
+  workflow_dispatch:
+    inputs:
+      libwebp_ref:
+        description: 'libwebp tag to checkout (i.e. v1.2.3)'
+        required: true
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-binaries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - run: git -C libwebp-jni/libwebp checkout ${{ inputs.libwebp_ref }}
+
+      - run: cd libwebp-jni && ./compile-all.sh
+
+      - run: git status
+
+      - uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.PUBLIC_REPO_TOKEN }}
+          commit-message: "Rebuild binaries for ${{ inputs.libwebp_ref }}"
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          delete-branch: true
+          title: "Rebuild binaries for libwebp version ${{ inputs.libwebp_ref }}"
+          body: |
+            Rebuild binaries based on https://chromium.googlesource.com/webm/libwebp/+/refs/tags/${{ inputs.libwebp_ref }}
