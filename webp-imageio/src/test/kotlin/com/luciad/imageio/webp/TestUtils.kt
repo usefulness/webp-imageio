@@ -1,21 +1,16 @@
 package com.luciad.imageio.webp
 
+import java.awt.image.BufferedImage
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.File
+import javax.imageio.IIOImage
 import javax.imageio.ImageIO
+import javax.imageio.ImageReadParam
 import javax.imageio.ImageReader
 import javax.imageio.ImageWriter
+import javax.imageio.stream.FileImageOutputStream
 import javax.imageio.stream.MemoryCacheImageInputStream
-
-internal val imageWriter get() = ImageIO.getImageWritersByMIMEType("image/webp").requireWebpImageWriter()
-
-internal val imageReader get() = ImageIO.getImageReadersByMIMEType("image/webp").requireWebpImageReader()
-
-internal fun getImageReader(data: ByteArray): ImageReader {
-    val stream = MemoryCacheImageInputStream(ByteArrayInputStream(data))
-
-    return ImageIO.getImageReaders(stream).requireWebpImageReader()
-}
 
 internal fun Iterator<ImageReader>.requireWebpImageReader() = asSequence().single { it.originatingProvider is WebPImageReaderSpi }
 internal fun Iterator<ImageWriter>.requireWebpImageWriter() = asSequence().single { it.originatingProvider is WebPImageWriterSpi }
@@ -37,6 +32,28 @@ internal fun getResourceStream(resource: String) = checkNotNull(ResourcesLoader:
     "Could not load resource $resource"
 }
 
-internal fun decompress(webp: ByteArray) = checkNotNull(getImageReader(webp))
+internal fun readImage(webp: ByteArray, param: ImageReadParam? = null) = checkNotNull(getImageReader(webp))
     .apply { input = MemoryCacheImageInputStream(ByteArrayInputStream(webp)) }
-    .read(0)
+    .read(0, param)
+
+private fun getImageReader(data: ByteArray): ImageReader {
+    val stream = MemoryCacheImageInputStream(ByteArrayInputStream(data))
+
+    return ImageIO.getImageReaders(stream).requireWebpImageReader()
+}
+
+internal fun writeWebpImage(input: BufferedImage, target: Any, params: WebPWriteParam.() -> Unit = { }) =
+    ImageIO.getImageWritersByMIMEType("image/webp")
+        .asSequence()
+        .single()
+        .apply { output = target }
+        .run {
+            val updated = (defaultWriteParam as WebPWriteParam).apply(params)
+            write(null, IIOImage(input, null, null), updated)
+        }
+
+internal fun writeWebpImage(input: BufferedImage, target: File, params: WebPWriteParam.() -> Unit = { }) = writeWebpImage(
+    input = input,
+    target = FileImageOutputStream(target),
+    params = params,
+)

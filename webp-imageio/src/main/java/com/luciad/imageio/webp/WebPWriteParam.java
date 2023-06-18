@@ -77,18 +77,6 @@ public class WebPWriteParam extends ImageWriteParam {
     fOptions.setLossless(fDefaultLossless);
   }
 
-
-  public boolean getLossless() {
-    return fOptions.getLossless();
-  }
-
-  /**
-   * Lossless encoding. false=lossy(default), true=lossless.
-   */
-  public void setLossless(boolean value) {
-    fOptions.setLossless(value);
-  }
-
   public int getMethod() {
     return fOptions.getMethod();
   }
