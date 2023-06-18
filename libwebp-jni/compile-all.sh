@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -e -o pipefail
+
 # Ensure clean build environments
 rm -rf build
 
@@ -15,5 +17,7 @@ rm -rf build
 
 docker run --rm -v $(pwd):/workdir -e CROSS_TRIPLE=x86_64-apple-darwin gotson/crossbuild ./compile.sh Mac x86_64 /workdir/multiarch-darwin.cmake
 docker run --rm -v $(pwd):/workdir -e CROSS_TRIPLE=arm64-apple-darwin gotson/crossbuild ./compile.sh Mac aarch64 /workdir/multiarch-darwin.cmake
+
+# Ensure clean target
 rm -r ../webp-imageio/src/main/resources/native
 cp -r build/native ../webp-imageio/src/main/resources/
