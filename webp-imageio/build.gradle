@@ -16,6 +16,11 @@ tasks.withType(JavaCompile).configureEach {
 tasks.withType(KotlinCompile).configureEach {
     kotlinOptions.jvmTarget = targetJavaVersion
 }
+tasks.withType(Javadoc).configureEach {
+    options {
+        addStringOption("Xdoclint:none", "-quiet")
+    }
+}
 
 kotlin {
     jvmToolchain(17)
