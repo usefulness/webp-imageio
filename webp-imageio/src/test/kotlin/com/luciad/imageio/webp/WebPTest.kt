@@ -113,7 +113,6 @@ class WebPTest {
             input = image,
             target = imageOut,
             params = {
-                compressionMode = ImageWriteParam.MODE_EXPLICIT
                 compressionType = "Lossless"
             },
         )
@@ -205,24 +204,24 @@ class WebPTest {
         val outputFileWithSharpYuv = tempDir.resolve("output_sharp_yuv.webp").toFile()
         val outputFileDefault = tempDir.resolve("output_default.webp").toFile()
 
+        fun WebPWriteParam.prepareParams() {
+            compressionType = compressionTypes[WebPWriteParam.LOSSY_COMPRESSION]
+            compressionQuality = 0.95f
+        }
         writeWebpImage(
             input = inputImage,
             target = outputFileWithSharpYuv,
             params = {
+                prepareParams()
                 useSharpYUV = true
-                compressionMode = ImageWriteParam.MODE_EXPLICIT
-                compressionType = compressionTypes[WebPWriteParam.LOSSY_COMPRESSION]
-                compressionQuality = 0.95f
             },
         )
         writeWebpImage(
             input = inputImage,
             target = outputFileDefault,
             params = {
+                prepareParams()
                 useSharpYUV = false
-                compressionMode = ImageWriteParam.MODE_EXPLICIT
-                compressionType = compressionTypes[WebPWriteParam.LOSSY_COMPRESSION]
-                compressionQuality = 0.95f
             },
         )
 
