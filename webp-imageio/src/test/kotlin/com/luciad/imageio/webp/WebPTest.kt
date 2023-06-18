@@ -158,7 +158,7 @@ class WebPTest {
 
     @Test
     fun canUseAllWriteOptions(@TempDir tempDir: Path) {
-        val inputImage = ImageIO.read(getResourceStream("image-subsampling-test.png"))
+        val inputImage = ImageIO.read(getResourceStream("test4.png"))
         val outputFile = tempDir.resolve("output.webp").toFile()
 
         writeWebpImage(
@@ -226,10 +226,12 @@ class WebPTest {
         )
 
         val outputImageWithYuv = ImageIO.read(outputFileWithSharpYuv)
+        val referenceWithYuv = ImageIO.read(getResourceStream("test4_sharp.webp"))
         val outputImageDefault = ImageIO.read(outputFileDefault)
-        assertThat(outputImageWithYuv).isNotNull()
-        assertThat(outputImageWithYuv).usingComparator(::imagesComparator).isNotEqualTo(outputImageDefault)
-        assertThat(outputFileWithSharpYuv.length()).isNotEqualTo(outputFileDefault.length())
+        val referenceDefault = ImageIO.read(getResourceStream("test4_default.webp"))
+
+        assertThat(outputImageDefault).usingComparator(::imagesComparator).isEqualTo(referenceDefault)
+        assertThat(outputImageWithYuv).usingComparator(::imagesComparator).isEqualTo(referenceWithYuv)
     }
 
     private fun imagesComparator(img1: BufferedImage, img2: BufferedImage): Int {
