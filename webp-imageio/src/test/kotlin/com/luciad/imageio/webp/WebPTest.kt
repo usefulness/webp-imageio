@@ -1,7 +1,6 @@
 package com.luciad.imageio.webp
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 import java.awt.image.BufferedImage
@@ -198,7 +197,6 @@ class WebPTest {
     }
 
     @Test
-    @Disabled("useSharpYUV doesn't make any difference")
     fun sharpYuv(@TempDir tempDir: Path) {
         val inputImage = ImageIO.read(getResourceStream("test4.png"))
         val outputFileWithSharpYuv = tempDir.resolve("output_sharp_yuv.webp").toFile()

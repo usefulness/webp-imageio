@@ -289,11 +289,11 @@ static jbyteArray encode
   pic.writer = WebPMemoryWrite;
   pic.custom_ptr = &wrt;
 
-  if (config->lossless) {
-    pic.use_argb = 1;
-  } else {
-    pic.use_argb = 0;
-  }
+  // Read the input. We need to decide if we prefer ARGB or YUVA
+  // samples, depending on the expected compression mode (this saves
+  // some conversion steps).
+  pic.use_argb = (config->lossless || config->use_sharp_yuv ||
+                      config->preprocessing > 0);
 
   WebPMemoryWriterInit(&wrt);
 
