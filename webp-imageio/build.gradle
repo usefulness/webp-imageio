@@ -57,6 +57,9 @@ tasks.named("processResources") {
 }
 
 dependencies {
+    implementation("androidx.annotation:annotation:1.6.0") {
+        exclude group: "org.jetbrains.kotlin", module: 'kotlin-stdlib'
+    }
     testImplementation(libs.assertj.core)
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.junit.jupiter.api)

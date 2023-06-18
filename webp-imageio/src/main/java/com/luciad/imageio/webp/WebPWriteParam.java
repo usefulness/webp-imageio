@@ -15,6 +15,9 @@
  */
 package com.luciad.imageio.webp;
 
+import androidx.annotation.FloatRange;
+import androidx.annotation.IntRange;
+
 import javax.imageio.ImageWriteParam;
 import java.util.Locale;
 
@@ -23,12 +26,13 @@ public class WebPWriteParam extends ImageWriteParam {
   public static final int LOSSLESS_COMPRESSION = 1;
 
   private final boolean fDefaultLossless;
-  private WebPEncoderOptions fOptions;
+
+  private final WebPEncoderOptions fOptions;
 
   public WebPWriteParam(Locale aLocale) {
     super(aLocale);
     fOptions = new WebPEncoderOptions();
-    fDefaultLossless = fOptions.isLossless();
+    fDefaultLossless = fOptions.getLossless();
     canWriteCompressed = true;
     compressionTypes = new String[]{
         "Lossy",
@@ -44,8 +48,13 @@ public class WebPWriteParam extends ImageWriteParam {
     return super.getCompressionQuality();
   }
 
+  /**
+   * For lossy, 0f gives the smallest size and 1f the largest.
+   * For lossless, this parameter is the amount of effort put into the compression:
+   * 0f is the fastest but gives larger files compared to the slowest, but best, 1f.
+   */
   @Override
-  public void setCompressionQuality(float quality) {
+  public void setCompressionQuality(@FloatRange(from = 0f, to = 1f) float quality) {
     super.setCompressionQuality(quality);
     fOptions.setCompressionQuality(quality * 100f);
   }
@@ -68,172 +77,313 @@ public class WebPWriteParam extends ImageWriteParam {
     fOptions.setLossless(fDefaultLossless);
   }
 
-  public void setSnsStrength(int aSnsStrength) {
-    fOptions.setSnsStrength(aSnsStrength);
+
+  public boolean getLossless() {
+    return fOptions.getLossless();
   }
 
-  public void setAlphaQuality(int aAlphaQuality) {
-    fOptions.setAlphaQuality(aAlphaQuality);
-  }
-
-  public int getSegments() {
-    return fOptions.getSegments();
-  }
-
-  public int getPreprocessing() {
-    return fOptions.getPreprocessing();
-  }
-
-  public int getFilterStrength() {
-    return fOptions.getFilterStrength();
-  }
-
-  public void setEmulateJpegSize(boolean aEmulateJpegSize) {
-    fOptions.setEmulateJpegSize(aEmulateJpegSize);
-  }
-
-  public int getPartitions() {
-    return fOptions.getPartitions();
-  }
-
-  public void setTargetPSNR(float aTargetPSNR) {
-    fOptions.setTargetPSNR(aTargetPSNR);
-  }
-
-  public int getEntropyAnalysisPassCount() {
-    return fOptions.getEntropyAnalysisPassCount();
-  }
-
-  public int getPartitionLimit() {
-    return fOptions.getPartitionLimit();
-  }
-
-  public int getFilterType() {
-    return fOptions.getFilterType();
-  }
-
-  public int getFilterSharpness() {
-    return fOptions.getFilterSharpness();
-  }
-
-  public int getAlphaQuality() {
-    return fOptions.getAlphaQuality();
-  }
-
-  public boolean isShowCompressed() {
-    return fOptions.isShowCompressed();
-  }
-
-  public boolean isReduceMemoryUsage() {
-    return fOptions.isReduceMemoryUsage();
-  }
-
-  public void setThreadLevel(int aThreadLevel) {
-    fOptions.setThreadLevel(aThreadLevel);
-  }
-
-  public boolean isAutoAdjustFilterStrength() {
-    return fOptions.isAutoAdjustFilterStrength();
-  }
-
-  public void setReduceMemoryUsage(boolean aLowMemory) {
-    fOptions.setReduceMemoryUsage(aLowMemory);
-  }
-
-  public void setFilterStrength(int aFilterStrength) {
-    fOptions.setFilterStrength(aFilterStrength);
-  }
-
-  public int getTargetSize() {
-    return fOptions.getTargetSize();
-  }
-
-  public void setEntropyAnalysisPassCount(int aPass) {
-    fOptions.setEntropyAnalysisPassCount(aPass);
-  }
-
-  public void setFilterSharpness(int aFilterSharpness) {
-    fOptions.setFilterSharpness(aFilterSharpness);
-  }
-
-  public int getAlphaFiltering() {
-    return fOptions.getAlphaFiltering();
-  }
-
-  public int getSnsStrength() {
-    return fOptions.getSnsStrength();
-  }
-
-  public void setPartitionLimit(int aPartitionLimit) {
-    fOptions.setPartitionLimit(aPartitionLimit);
-  }
-
-  public void setMethod(int aMethod) {
-    fOptions.setMethod(aMethod);
-  }
-
-  public void setAlphaFiltering(int aAlphaFiltering) {
-    fOptions.setAlphaFiltering(aAlphaFiltering);
+  /**
+   * Lossless encoding. false=lossy(default), true=lossless.
+   */
+  public void setLossless(boolean value) {
+    fOptions.setLossless(value);
   }
 
   public int getMethod() {
     return fOptions.getMethod();
   }
 
-  public void setFilterType(int aFilterType) {
-    fOptions.setFilterType(aFilterType);
+  /**
+   * quality/speed trade-off (0=fast, 6=slower-better)
+   */
+  public void setMethod(@IntRange(from = 0, to = 6) int aMethod) {
+    fOptions.setMethod(aMethod);
   }
 
-  public void setPartitions(int aPartitions) {
-    fOptions.setPartitions(aPartitions);
+  public int getTargetSize() {
+    return fOptions.getTargetSize();
   }
 
-  public void setAutoAdjustFilterStrength(boolean aAutofilter) {
-    fOptions.setAutoAdjustFilterStrength(aAutofilter);
-  }
-
-  public boolean isEmulateJpegSize() {
-    return fOptions.isEmulateJpegSize();
-  }
-
-  public int getAlphaCompression() {
-    return fOptions.getAlphaCompression();
-  }
-
-  public void setShowCompressed(boolean aShowCompressed) {
-    fOptions.setShowCompressed(aShowCompressed);
-  }
-
-  public void setSegments(int aSegments) {
-    fOptions.setSegments(aSegments);
+  /**
+   * if non-zero, set the desired target size in bytes.
+   * Takes precedence over the @{@link #setCompressionQuality(float)} parameter.
+   */
+  public void setTargetSize(int aTargetSize) {
+    fOptions.setTargetSize(aTargetSize);
   }
 
   public float getTargetPSNR() {
     return fOptions.getTargetPSNR();
   }
 
+  /**
+   * if non-zero, specifies the minimal distortion to try to achieve.
+   * Takes precedence over {@link #setTargetSize(int) }.
+   */
+  public void setTargetPSNR(float aTargetPSNR) {
+    fOptions.setTargetPSNR(aTargetPSNR);
+  }
+
+  public int getSegments() {
+    return fOptions.getSegments();
+  }
+
+  /**
+   * maximum number of segments to use
+   */
+  public void setSegments(@IntRange(from = 1, to = 4) int aSegments) {
+    fOptions.setSegments(aSegments);
+  }
+
+  public int getSnsStrength() {
+    return fOptions.getSnsStrength();
+  }
+
+  /**
+   * Spatial Noise Shaping. 0=off, 100=maximum.
+   */
+  public void setSnsStrength(@IntRange(from = 0, to = 100) int aSnsStrength) {
+    fOptions.setSnsStrength(aSnsStrength);
+  }
+
+  public int getFilterStrength() {
+    return fOptions.getFilterStrength();
+  }
+
+  /**
+   * range: [0 = off .. 100 = strongest]
+   */
+  public void setFilterStrength(@IntRange(from = 0, to = 100) int aFilterStrength) {
+    fOptions.setFilterStrength(aFilterStrength);
+  }
+
+  public int getFilterSharpness() {
+    return fOptions.getFilterSharpness();
+  }
+
+
+  /**
+   * range: [0 = off .. 7 = least sharp]
+   */
+  public void setFilterSharpness(@IntRange(from = 0, to = 7) int aFilterSharpness) {
+    fOptions.setFilterSharpness(aFilterSharpness);
+  }
+
+  public int getFilterType() {
+    return fOptions.getFilterType();
+  }
+
+  /**
+   * filtering type: 0 = simple, 1 = strong (only used if filter_strength > 0 or autofilter > 0)
+   */
+  public void setFilterType(@IntRange(from = 0, to = 1) int aFilterType) {
+    fOptions.setFilterType(aFilterType);
+  }
+
+  public boolean getAutoAdjustFilterStrength() {
+    return fOptions.getAutoAdjustFilterStrength();
+  }
+
+  /**
+   * Auto adjust filter's strength
+   */
+  public void setAutoAdjustFilterStrength(boolean value) {
+    fOptions.setAutoAdjustFilterStrength(value);
+  }
+
+  public int getAlphaCompressionAlgorithm() {
+    return fOptions.getAlphaCompressionAlgorithm();
+  }
+
+  /**
+   * Algorithm for encoding the alpha plane
+   * (0 = none, 1 = compressed with WebP lossless). Default is 1.
+   */
+  public void setAlphaCompressionAlgorithm(@IntRange(from = 0, to = 1) int aAlphaCompressionAlgorithm) {
+    fOptions.setAlphaCompressionAlgorithm(aAlphaCompressionAlgorithm);
+  }
+
+  public int getAlphaFiltering() {
+    return fOptions.getAlphaFiltering();
+  }
+
+  /**
+   * Predictive filtering method for alpha plane.
+   * 0: none, 1: fast, 2: best. Default if 1.
+   */
+  public void setAlphaFiltering(@IntRange(from = 0, to = 2) int aAlphaFiltering) {
+    fOptions.setAlphaFiltering(aAlphaFiltering);
+  }
+
+  public int getAlphaQuality() {
+    return fOptions.getAlphaQuality();
+  }
+
+  /**
+   * 0: smallest size, 100: lossless. Default is 100.
+   */
+  public void setAlphaQuality(@IntRange(from = 0, to = 100) int aAlphaQuality) {
+    fOptions.setAlphaQuality(aAlphaQuality);
+  }
+
+  public int getEntropyAnalysisPassCount() {
+    return fOptions.getEntropyAnalysisPassCount();
+  }
+
+  /**
+   * Number of entropy-analysis passes
+   */
+  public void setEntropyAnalysisPassCount(@IntRange(from = 1, to = 10) int aEntropyAnalysisPassCount) {
+    fOptions.setEntropyAnalysisPassCount(aEntropyAnalysisPassCount);
+  }
+
+  public boolean getShowCompressed() {
+    return fOptions.getShowCompressed();
+  }
+
+  /**
+   * if true, export the compressed picture back. In-loop filtering is not applied.
+   */
+  public void setShowCompressed(boolean value) {
+    fOptions.setShowCompressed(value);
+  }
+
+  public int getPreprocessing() {
+    return fOptions.getPreprocessing();
+  }
+
+  /**
+   * Preprocessing filter
+   * 0=none, 1=segment-smooth, 2=pseudo-random dithering
+   */
+  public void setPreprocessing(@IntRange(from = 0, to = 2) int aPreprocessing) {
+    fOptions.setPreprocessing(aPreprocessing);
+  }
+
+  public int getPartitions() {
+    return fOptions.getPartitions();
+  }
+
+  /**
+   * log2(number of token partitions) in [0..3]. Default is set to 0 for easier progressive decoding.
+   */
+  public void setPartitions(@IntRange(from = 0, to = 3) int aPartitions) {
+    fOptions.setPartitions(aPartitions);
+  }
+
+  public int getPartitionLimit() {
+    return fOptions.getPartitionLimit();
+  }
+
+  /**
+   * Quality degradation allowed to fit the 512k limit on prediction modes coding
+   * 0: no degradation, 100: maximum possible degradation
+   */
+  public void setPartitionLimit(@IntRange(from = 0, to = 100) int aPartitionLimit) {
+    fOptions.setPartitionLimit(aPartitionLimit);
+  }
+
+  public boolean getEmulateJpegSize() {
+    return fOptions.getEmulateJpegSize();
+  }
+
+  /**
+   * If true, compression parameters will be remapped to better match the expected output size from
+   * JPEG compression. Generally, the output size will be similar but the degradation will be lower.
+   */
+  public void setEmulateJpegSize(boolean value) {
+    fOptions.setEmulateJpegSize(value);
+  }
+
   public int getThreadLevel() {
     return fOptions.getThreadLevel();
   }
 
-  public void setTargetSize(int aTargetSize) {
-    fOptions.setTargetSize(aTargetSize);
+  /**
+   * If non-zero, try and use multi-threaded encoding.
+   */
+  public void setThreadLevel(int aThreadLevel) {
+    fOptions.setThreadLevel(aThreadLevel);
   }
 
-  public void setAlphaCompression(int aAlphaCompression) {
-    fOptions.setAlphaCompression(aAlphaCompression);
+  public boolean getLowMemory() {
+    return fOptions.getLowMemory();
   }
 
-  public void setPreprocessing(int aPreprocessing) {
-    fOptions.setPreprocessing(aPreprocessing);
+  /**
+   * If set, reduce memory usage (but increase CPU use).
+   */
+  public void setLowMemory(boolean aLowMemory) {
+    fOptions.setLowMemory(aLowMemory);
   }
 
-  public void setUseSharpYUV(boolean aUseSharpYUV) {
-    fOptions.setUseSharpYUV(aUseSharpYUV);
+  public int getNearLossless() {
+    return fOptions.getNearLossless();
+  }
+
+  /**
+   * Near lossless encoding
+   * 0 = max loss, 100 = off (default)
+   */
+  public void setNearLossless(@IntRange(from = 0, to = 100) int aNearLossless) {
+    fOptions.setNearLossless(aNearLossless);
+  }
+
+  public boolean getExact() {
+    return fOptions.getExact();
+  }
+
+  /**
+   * If non-zero, preserve the exact RGB values under transparent area.
+   * Otherwise, discard this invisible RGB information for better compression.
+   * The default value is false.
+   */
+  public void setExact(boolean value) {
+    fOptions.setExact(value);
+  }
+
+  public boolean getUseDeltaPalette() {
+    return fOptions.getUseDeltaPalette();
+  }
+
+  /**
+   * reserved for future lossless feature
+   */
+  public void setUseDeltaPalette(boolean value) {
+    fOptions.setUseDeltaPalette(value);
   }
 
   public boolean getUseSharpYUV() {
     return fOptions.getUseSharpYUV();
+  }
+
+  /**
+   * if needed, use sharp (and slow) RGB->YUV conversion
+   */
+  public void setUseSharpYUV(boolean value) {
+    fOptions.setUseSharpYUV(value);
+  }
+
+  public int getQMin() {
+    return fOptions.getQMin();
+  }
+
+  /**
+   * minimum permissible quality factor
+   */
+  public void setQMin(int aQMin) {
+    fOptions.setQMin(aQMin);
+  }
+
+  public int getQMax() {
+    return fOptions.getQMax();
+  }
+
+  /**
+   * maximum permissible quality factor
+   */
+  public void setQMax(int aQMax) {
+    fOptions.setQMax(aQMax);
   }
 
   WebPEncoderOptions getEncoderOptions() {

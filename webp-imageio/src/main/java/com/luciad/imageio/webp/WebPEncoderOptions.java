@@ -15,7 +15,9 @@
  */
 package com.luciad.imageio.webp;
 
+
 public class WebPEncoderOptions {
+
   static {
     WebP.loadNativeLibrary();
   }
@@ -44,20 +46,28 @@ public class WebPEncoderOptions {
     return fPointer;
   }
 
+  public boolean getLossless() {
+    return getLossless(fPointer);
+  }
+
+  public void setLossless(boolean aLossless) {
+    setLossless(fPointer, aLossless);
+  }
+
   public float getCompressionQuality() {
     return getQuality(fPointer);
   }
 
-  public void setCompressionQuality(float quality) {
-    setQuality(fPointer, quality);
+  public void setCompressionQuality(float aQuality) {
+    setQuality(fPointer, aQuality);
   }
 
-  public boolean isLossless() {
-    return getLossless(fPointer) != 0;
+  public int getMethod() {
+    return getMethod(fPointer);
   }
 
-  public void setLossless(boolean aLossless) {
-    setLossless(fPointer, aLossless ? 1 : 0);
+  public void setMethod(int aMethod) {
+    setMethod(fPointer, aMethod);
   }
 
   public int getTargetSize() {
@@ -74,14 +84,6 @@ public class WebPEncoderOptions {
 
   public void setTargetPSNR(float aTargetPSNR) {
     setTargetPSNR(fPointer, aTargetPSNR);
-  }
-
-  public int getMethod() {
-    return getMethod(fPointer);
-  }
-
-  public void setMethod(int aMethod) {
-    setMethod(fPointer, aMethod);
   }
 
   public int getSegments() {
@@ -104,6 +106,7 @@ public class WebPEncoderOptions {
     return getFilterStrength(fPointer);
   }
 
+
   public void setFilterStrength(int aFilterStrength) {
     setFilterStrength(fPointer, aFilterStrength);
   }
@@ -124,12 +127,38 @@ public class WebPEncoderOptions {
     setFilterType(fPointer, aFilterType);
   }
 
-  public boolean isAutoAdjustFilterStrength() {
-    return getAutofilter(fPointer) != 0;
+  public boolean getAutoAdjustFilterStrength() {
+    return getAutofilter(fPointer);
   }
 
   public void setAutoAdjustFilterStrength(boolean aAutofilter) {
-    setAutofilter(fPointer, aAutofilter ? 1 : 0);
+    setAutofilter(fPointer, aAutofilter);
+  }
+
+  public int getAlphaCompressionAlgorithm() {
+    return getAlphaCompression(fPointer);
+  }
+
+
+  public void setAlphaCompressionAlgorithm(int aAlphaCompression) {
+    setAlphaCompression(fPointer, aAlphaCompression);
+  }
+
+  public int getAlphaFiltering() {
+    return getAlphaFiltering(fPointer);
+  }
+
+
+  public void setAlphaFiltering(int aAlphaFiltering) {
+    setAlphaFiltering(fPointer, aAlphaFiltering);
+  }
+
+  public int getAlphaQuality() {
+    return getAlphaQuality(fPointer);
+  }
+
+  public void setAlphaQuality(int aAlphaQuality) {
+    setAlphaQuality(fPointer, aAlphaQuality);
   }
 
   public int getEntropyAnalysisPassCount() {
@@ -140,12 +169,12 @@ public class WebPEncoderOptions {
     setPass(fPointer, aPass);
   }
 
-  public boolean isShowCompressed() {
-    return getShowCompressed(fPointer) != 0;
+  public boolean getShowCompressed() {
+    return getShowCompressed(fPointer);
   }
 
   public void setShowCompressed(boolean aShowCompressed) {
-    setShowCompressed(fPointer, aShowCompressed ? 1 : 0);
+    setShowCompressed(fPointer, aShowCompressed);
   }
 
   public int getPreprocessing() {
@@ -160,6 +189,7 @@ public class WebPEncoderOptions {
     return getPartitions(fPointer);
   }
 
+
   public void setPartitions(int aPartitions) {
     setPartitions(fPointer, aPartitions);
   }
@@ -172,36 +202,12 @@ public class WebPEncoderOptions {
     setPartitionLimit(fPointer, aPartitionLimit);
   }
 
-  public int getAlphaCompression() {
-    return getAlphaCompression(fPointer);
-  }
-
-  public void setAlphaCompression(int aAlphaCompression) {
-    setAlphaCompression(fPointer, aAlphaCompression);
-  }
-
-  public int getAlphaFiltering() {
-    return getAlphaFiltering(fPointer);
-  }
-
-  public void setAlphaFiltering(int aAlphaFiltering) {
-    setAlphaFiltering(fPointer, aAlphaFiltering);
-  }
-
-  public int getAlphaQuality() {
-    return getAlphaQuality(fPointer);
-  }
-
-  public void setAlphaQuality(int aAlphaQuality) {
-    setAlphaQuality(fPointer, aAlphaQuality);
-  }
-
-  public boolean isEmulateJpegSize() {
-    return getEmulateJpegSize(fPointer) != 0;
+  public boolean getEmulateJpegSize() {
+    return getEmulateJpegSize(fPointer);
   }
 
   public void setEmulateJpegSize(boolean aEmulateJpegSize) {
-    setEmulateJpegSize(fPointer, aEmulateJpegSize ? 1 : 0);
+    setEmulateJpegSize(fPointer, aEmulateJpegSize);
   }
 
   public int getThreadLevel() {
@@ -212,25 +218,78 @@ public class WebPEncoderOptions {
     setThreadLevel(fPointer, aThreadLevel);
   }
 
-  public boolean isReduceMemoryUsage() {
-    return getLowMemory(fPointer) != 0;
+  public boolean getLowMemory() {
+    return getLowMemory(fPointer);
   }
 
-  public void setReduceMemoryUsage(boolean aLowMemory) {
-    setLowMemory(fPointer, aLowMemory ? 1 : 0);
+  public void setLowMemory(boolean aLowMemory) {
+    setLowMemory(fPointer, aLowMemory);
+  }
+
+  public int getNearLossless() {
+    return getNearLossless(fPointer);
+  }
+
+
+  public void setNearLossless(int aNearLossless) {
+    setNearLossless(fPointer, aNearLossless);
+  }
+
+
+  public boolean getExact() {
+    return getExact(fPointer);
+  }
+
+
+  public void setExact(boolean aExact) {
+    setExact(fPointer, aExact);
+  }
+
+  public boolean getUseDeltaPalette() {
+    return getUseDeltaPalette(fPointer);
+  }
+
+  public void setUseDeltaPalette(boolean aUseDeltaPalette) {
+    setUseDeltaPalette(fPointer, aUseDeltaPalette);
   }
 
   public boolean getUseSharpYUV() {
-    return getUseSharpYUV(fPointer) != 0;
+    return getUseSharpYUV(fPointer);
   }
 
   public void setUseSharpYUV(boolean aUseSharpYUV) {
-    setUseSharpYUV(fPointer, aUseSharpYUV ? 1 : 0);
+    setUseSharpYUV(fPointer, aUseSharpYUV);
   }
+
+
+  public int getQMin() {
+    return getQMin(fPointer);
+  }
+
+
+  public void setQMin(int aQMin) {
+    setQMin(fPointer, aQMin);
+  }
+
+  public int getQMax() {
+    return getQMax(fPointer);
+  }
+
+  public void setQMax(int aQMax) {
+    setQMax(fPointer, aQMax);
+  }
+
+  private static native boolean getLossless(long aPointer);
+
+  private static native void setLossless(long aPointer, boolean aLossless);
 
   private static native float getQuality(long aPointer);
 
   private static native void setQuality(long aPointer, float aQuality);
+
+  private static native int getMethod(long aPointer);
+
+  private static native void setMethod(long aPointer, int aMethod);
 
   private static native int getTargetSize(long aPointer);
 
@@ -239,10 +298,6 @@ public class WebPEncoderOptions {
   private static native float getTargetPSNR(long aPointer);
 
   private static native void setTargetPSNR(long aPointer, float aTargetPSNR);
-
-  private static native int getMethod(long aPointer);
-
-  private static native void setMethod(long aPointer, int aMethod);
 
   private static native int getSegments(long aPointer);
 
@@ -264,29 +319,9 @@ public class WebPEncoderOptions {
 
   private static native void setFilterType(long aPointer, int aFilterType);
 
-  private static native int getAutofilter(long aPointer);
+  private static native boolean getAutofilter(long aPointer);
 
-  private static native void setAutofilter(long aPointer, int aAutofilter);
-
-  private static native int getPass(long aPointer);
-
-  private static native void setPass(long aPointer, int aPass);
-
-  private static native int getShowCompressed(long aPointer);
-
-  private static native void setShowCompressed(long aPointer, int aShowCompressed);
-
-  private static native int getPreprocessing(long aPointer);
-
-  private static native void setPreprocessing(long aPointer, int aPreprocessing);
-
-  private static native int getPartitions(long aPointer);
-
-  private static native void setPartitions(long aPointer, int aPartitions);
-
-  private static native int getPartitionLimit(long aPointer);
-
-  private static native void setPartitionLimit(long aPointer, int aPartitionLimit);
+  private static native void setAutofilter(long aPointer, boolean aAutofilter);
 
   private static native int getAlphaCompression(long aPointer);
 
@@ -300,23 +335,59 @@ public class WebPEncoderOptions {
 
   private static native void setAlphaQuality(long aPointer, int aAlphaQuality);
 
-  private static native int getLossless(long aPointer);
+  private static native int getPass(long aPointer);
 
-  private static native void setLossless(long aPointer, int aLossless);
+  private static native void setPass(long aPointer, int aPass);
 
-  private static native int getEmulateJpegSize(long aPointer);
+  private static native boolean getShowCompressed(long aPointer);
 
-  private static native void setEmulateJpegSize(long aPointer, int aEmulateJpegSize);
+  private static native void setShowCompressed(long aPointer, boolean aShowCompressed);
+
+  private static native int getPreprocessing(long aPointer);
+
+  private static native void setPreprocessing(long aPointer, int aPreprocessing);
+
+  private static native int getPartitions(long aPointer);
+
+  private static native void setPartitions(long aPointer, int aPartitions);
+
+  private static native int getPartitionLimit(long aPointer);
+
+  private static native void setPartitionLimit(long aPointer, int aPartitionLimit);
+
+  private static native boolean getEmulateJpegSize(long aPointer);
+
+  private static native void setEmulateJpegSize(long aPointer, boolean aEmulateJpegSize);
 
   private static native int getThreadLevel(long aPointer);
 
   private static native void setThreadLevel(long aPointer, int aThreadLevel);
 
-  private static native int getLowMemory(long aPointer);
+  private static native boolean getLowMemory(long aPointer);
 
-  private static native void setLowMemory(long aPointer, int aLowMemory);
+  private static native void setLowMemory(long aPointer, boolean aLowMemory);
 
-  private static native int getUseSharpYUV(long aPointer);
+  private static native int getNearLossless(long aPointer);
 
-  private static native void setUseSharpYUV(long aPointer, int aUseSharpYUV);
+  private static native void setNearLossless(long aPointer, int aNearLossless);
+
+  private static native boolean getExact(long aPointer);
+
+  private static native void setExact(long aPointer, boolean aExact);
+
+  private static native boolean getUseDeltaPalette(long aPointer);
+
+  private static native void setUseDeltaPalette(long aPointer, boolean aUseDeltaPalette);
+
+  private static native boolean getUseSharpYUV(long aPointer);
+
+  private static native void setUseSharpYUV(long aPointer, boolean aUseSharpYUV);
+
+  private static native int getQMin(long aPointer);
+
+  private static native void setQMin(long aPointer, int aQMin);
+
+  private static native int getQMax(long aPointer);
+
+  private static native void setQMax(long aPointer, int aQMax);
 }

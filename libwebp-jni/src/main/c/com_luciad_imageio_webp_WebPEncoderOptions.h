@@ -7,16 +7,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#undef com_luciad_imageio_webp_WebPEncoderOptions_MODE_DISABLED
-#define com_luciad_imageio_webp_WebPEncoderOptions_MODE_DISABLED 0L
-#undef com_luciad_imageio_webp_WebPEncoderOptions_MODE_DEFAULT
-#define com_luciad_imageio_webp_WebPEncoderOptions_MODE_DEFAULT 1L
-#undef com_luciad_imageio_webp_WebPEncoderOptions_MODE_EXPLICIT
-#define com_luciad_imageio_webp_WebPEncoderOptions_MODE_EXPLICIT 2L
-#undef com_luciad_imageio_webp_WebPEncoderOptions_MODE_COPY_FROM_METADATA
-#define com_luciad_imageio_webp_WebPEncoderOptions_MODE_COPY_FROM_METADATA 3L
-#undef com_luciad_imageio_webp_WebPEncoderOptions_MAX_MODE
-#define com_luciad_imageio_webp_WebPEncoderOptions_MAX_MODE 3L
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
  * Method:    createConfig
@@ -35,6 +25,22 @@ JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_deleteCon
 
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    getLossless
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getLossless
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    setLossless
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setLossless
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
  * Method:    getQuality
  * Signature: (J)F
  */
@@ -48,6 +54,22 @@ JNIEXPORT jfloat JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getQual
  */
 JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setQuality
   (JNIEnv *, jclass, jlong, jfloat);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    getMethod
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getMethod
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    setMethod
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setMethod
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
@@ -80,22 +102,6 @@ JNIEXPORT jfloat JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getTarg
  */
 JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setTargetPSNR
   (JNIEnv *, jclass, jlong, jfloat);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    getMethod
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getMethod
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    setMethod
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setMethod
-  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
@@ -180,98 +186,18 @@ JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setFilter
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
  * Method:    getAutofilter
- * Signature: (J)I
+ * Signature: (J)Z
  */
-JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getAutofilter
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getAutofilter
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
  * Method:    setAutofilter
- * Signature: (JI)V
+ * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setAutofilter
-  (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    getPass
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getPass
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    setPass
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setPass
-  (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    getShowCompressed
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getShowCompressed
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    setShowCompressed
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setShowCompressed
-  (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    getPreprocessing
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getPreprocessing
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    setPreprocessing
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setPreprocessing
-  (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    getPartitions
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getPartitions
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    setPartitions
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setPartitions
-  (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    getPartitionLimit
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getPartitionLimit
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    setPartitionLimit
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setPartitionLimit
-  (JNIEnv *, jclass, jlong, jint);
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
@@ -323,35 +249,99 @@ JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setAlphaQ
 
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    getLossless
+ * Method:    getPass
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getLossless
+JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getPass
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    setLossless
+ * Method:    setPass
  * Signature: (JI)V
  */
-JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setLossless
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setPass
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    getShowCompressed
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getShowCompressed
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    setShowCompressed
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setShowCompressed
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    getPreprocessing
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getPreprocessing
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    setPreprocessing
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setPreprocessing
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    getPartitions
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getPartitions
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    setPartitions
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setPartitions
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    getPartitionLimit
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getPartitionLimit
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    setPartitionLimit
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setPartitionLimit
   (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
  * Method:    getEmulateJpegSize
- * Signature: (J)I
+ * Signature: (J)Z
  */
-JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getEmulateJpegSize
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getEmulateJpegSize
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
  * Method:    setEmulateJpegSize
- * Signature: (JI)V
+ * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setEmulateJpegSize
-  (JNIEnv *, jclass, jlong, jint);
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
@@ -372,33 +362,113 @@ JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setThread
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
  * Method:    getLowMemory
- * Signature: (J)I
+ * Signature: (J)Z
  */
-JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getLowMemory
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getLowMemory
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
  * Method:    setLowMemory
- * Signature: (JI)V
+ * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setLowMemory
-  (JNIEnv *, jclass, jlong, jint);
+  (JNIEnv *, jclass, jlong, jboolean);
 
-  /*
+/*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
- * Method:    getUseSharpYUV
+ * Method:    getNearLossless
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getUseSharpYUV
+JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getNearLossless
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    setNearLossless
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setNearLossless
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    getExact
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getExact
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    setExact
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setExact
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    getUseDeltaPalette
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getUseDeltaPalette
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    setUseDeltaPalette
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setUseDeltaPalette
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    getUseSharpYUV
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getUseSharpYUV
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPEncoderOptions
  * Method:    setUseSharpYUV
- * Signature: (JI)V
+ * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setUseSharpYUV
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    getQMin
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getQMin
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    setQMin
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setQMin
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    getQMax
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_getQMax
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPEncoderOptions
+ * Method:    setQMax
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_setQMax
   (JNIEnv *, jclass, jlong, jint);
 
 #ifdef __cplusplus
