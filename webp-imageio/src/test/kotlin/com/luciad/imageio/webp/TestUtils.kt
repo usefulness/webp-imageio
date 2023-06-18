@@ -10,6 +10,7 @@ import javax.imageio.ImageReadParam
 import javax.imageio.ImageReader
 import javax.imageio.ImageWriter
 import javax.imageio.stream.FileImageOutputStream
+import javax.imageio.stream.ImageInputStream
 import javax.imageio.stream.MemoryCacheImageInputStream
 
 internal fun Iterator<ImageReader>.requireWebpImageReader() = asSequence().single { it.originatingProvider is WebPImageReaderSpi }
@@ -42,18 +43,21 @@ private fun getImageReader(data: ByteArray): ImageReader {
     return ImageIO.getImageReaders(stream).requireWebpImageReader()
 }
 
-internal fun writeWebpImage(input: BufferedImage, target: Any, params: WebPWriteParam.() -> Unit = { }) =
+internal fun writeWebpImage(input: BufferedImage, target: ImageInputStream, params: WebPWriteParam.() -> Unit = { }) =
     ImageIO.getImageWritersByMIMEType("image/webp")
         .asSequence()
         .single()
-        .apply { output = target }
         .run {
+            output = target
             val updated = (defaultWriteParam as WebPWriteParam).apply(params)
             write(null, IIOImage(input, null, null), updated)
         }
 
-internal fun writeWebpImage(input: BufferedImage, target: File, params: WebPWriteParam.() -> Unit = { }) = writeWebpImage(
-    input = input,
-    target = FileImageOutputStream(target),
-    params = params,
-)
+internal fun writeWebpImage(input: BufferedImage, target: File, params: WebPWriteParam.() -> Unit = { }) =
+    FileImageOutputStream(target).use { stream ->
+        writeWebpImage(
+            input = input,
+            target = stream,
+            params = params,
+        )
+    }
