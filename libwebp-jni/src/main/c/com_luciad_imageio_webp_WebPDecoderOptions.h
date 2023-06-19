@@ -25,19 +25,43 @@ JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_deleteDec
 
 /*
  * Class:     com_luciad_imageio_webp_WebPDecoderOptions
- * Method:    getCropHeight
- * Signature: (J)I
+ * Method:    getBypassFiltering
+ * Signature: (J)Z
  */
-JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_getCropHeight
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_getBypassFiltering
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPDecoderOptions
- * Method:    setCropHeight
- * Signature: (JI)V
+ * Method:    setBypassFiltering
+ * Signature: (JZ)V
  */
-JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setCropHeight
-  (JNIEnv *, jclass, jlong, jint);
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setBypassFiltering
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPDecoderOptions
+ * Method:    getNoFancyUpsampling
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_getNoFancyUpsampling
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPDecoderOptions
+ * Method:    setNoFancyUpsampling
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setNoFancyUpsampling
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPDecoderOptions
+ * Method:    getUseCropping
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_getUseCropping
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPDecoderOptions
@@ -73,6 +97,14 @@ JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setCropTo
 
 /*
  * Class:     com_luciad_imageio_webp_WebPDecoderOptions
+ * Method:    setUseCropping
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setUseCropping
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPDecoderOptions
  * Method:    getCropWidth
  * Signature: (J)I
  */
@@ -89,18 +121,50 @@ JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setCropWi
 
 /*
  * Class:     com_luciad_imageio_webp_WebPDecoderOptions
- * Method:    isFancyUpsampling
- * Signature: (J)Z
+ * Method:    getCropHeight
+ * Signature: (J)I
  */
-JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_isNoFancyUpsampling
+JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_getCropHeight
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPDecoderOptions
- * Method:    setFancyUpsampling
+ * Method:    setCropHeight
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setCropHeight
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPDecoderOptions
+ * Method:    getUseScaling
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_getUseScaling
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPDecoderOptions
+ * Method:    getScaledWidth
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_getScaledWidth
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPDecoderOptions
+ * Method:    setScaledWidth
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setScaledWidth
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPDecoderOptions
+ * Method:    setUseScaling
  * Signature: (JZ)V
  */
-JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setNoFancyUpsampling
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setUseScaling
   (JNIEnv *, jclass, jlong, jboolean);
 
 /*
@@ -121,58 +185,10 @@ JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setScaled
 
 /*
  * Class:     com_luciad_imageio_webp_WebPDecoderOptions
- * Method:    getScaledWidth
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_getScaledWidth
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPDecoderOptions
- * Method:    setScaledWidth
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setScaledWidth
-  (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPDecoderOptions
- * Method:    isUseCropping
+ * Method:    getUseThreads
  * Signature: (J)Z
  */
-JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_isUseCropping
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPDecoderOptions
- * Method:    setUseCropping
- * Signature: (JZ)V
- */
-JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setUseCropping
-  (JNIEnv *, jclass, jlong, jboolean);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPDecoderOptions
- * Method:    isUseScaling
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_isUseScaling
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPDecoderOptions
- * Method:    setUseScaling
- * Signature: (JZ)V
- */
-JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setUseScaling
-  (JNIEnv *, jclass, jlong, jboolean);
-
-/*
- * Class:     com_luciad_imageio_webp_WebPDecoderOptions
- * Method:    isUseThreads
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_isUseThreads
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_getUseThreads
   (JNIEnv *, jclass, jlong);
 
 /*
@@ -182,22 +198,54 @@ JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_isUse
  */
 JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setUseThreads
   (JNIEnv *, jclass, jlong, jboolean);
-  
+
 /*
  * Class:     com_luciad_imageio_webp_WebPDecoderOptions
- * Method:    isBypassFiltering
- * Signature: (J)Z
+ * Method:    getDitheringStrength
+ * Signature: (J)I
  */
-JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_isBypassFiltering
+JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_getDitheringStrength
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_luciad_imageio_webp_WebPDecoderOptions
- * Method:    setBypassFiltering
+ * Method:    setDitheringStrength
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setDitheringStrength
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPDecoderOptions
+ * Method:    getFlip
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_getFlip
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPDecoderOptions
+ * Method:    setFlip
  * Signature: (JZ)V
  */
-JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setBypassFiltering
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setFlip
   (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPDecoderOptions
+ * Method:    getAlphaDitheringStrength
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_getAlphaDitheringStrength
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_luciad_imageio_webp_WebPDecoderOptions
+ * Method:    setAlphaDitheringStrength
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPDecoderOptions_setAlphaDitheringStrength
+  (JNIEnv *, jclass, jlong, jint);
 
 #ifdef __cplusplus
 }

@@ -257,13 +257,16 @@ PROPERTY(WebPDecoderOptions, jint, get, set, CropHeight, WebPDecoderOptions, cro
 PROPERTY(WebPDecoderOptions, jint, get, set, CropLeft, WebPDecoderOptions, crop_left)
 PROPERTY(WebPDecoderOptions, jint, get, set, CropTop, WebPDecoderOptions, crop_top)
 PROPERTY(WebPDecoderOptions, jint, get, set, CropWidth, WebPDecoderOptions, crop_width)
-PROPERTY(WebPDecoderOptions, jboolean, is, set, NoFancyUpsampling, WebPDecoderOptions, no_fancy_upsampling)
+PROPERTY(WebPDecoderOptions, jboolean, get, set, BypassFiltering, WebPDecoderOptions, bypass_filtering)
+PROPERTY(WebPDecoderOptions, jboolean, get, set, NoFancyUpsampling, WebPDecoderOptions, no_fancy_upsampling)
+PROPERTY(WebPDecoderOptions, jboolean, get, set, UseCropping, WebPDecoderOptions, use_cropping)
+PROPERTY(WebPDecoderOptions, jboolean, get, set, UseScaling, WebPDecoderOptions, use_scaling)
 PROPERTY(WebPDecoderOptions, jint, get, set, ScaledWidth, WebPDecoderOptions, scaled_width)
 PROPERTY(WebPDecoderOptions, jint, get, set, ScaledHeight, WebPDecoderOptions, scaled_height)
-PROPERTY(WebPDecoderOptions, jboolean, is, set, UseCropping, WebPDecoderOptions, use_cropping)
-PROPERTY(WebPDecoderOptions, jboolean, is, set, UseScaling, WebPDecoderOptions, use_scaling)
-PROPERTY(WebPDecoderOptions, jboolean, is, set, UseThreads, WebPDecoderOptions, use_threads)
-PROPERTY(WebPDecoderOptions, jboolean, is, set, BypassFiltering, WebPDecoderOptions, bypass_filtering)
+PROPERTY(WebPDecoderOptions, jboolean, get, set, UseThreads, WebPDecoderOptions, use_threads)
+PROPERTY(WebPDecoderOptions, jint, get, set, DitheringStrength, WebPDecoderOptions, dithering_strength)
+PROPERTY(WebPDecoderOptions, jboolean, get, set, Flip, WebPDecoderOptions, flip)
+PROPERTY(WebPDecoderOptions, jint, get, set, AlphaDitheringStrength, WebPDecoderOptions, alpha_dithering_strength)
 
 typedef int (*Importer)(WebPPicture* const, const uint8_t* const, int);
 
@@ -286,11 +289,11 @@ static jbyteArray encode
   pic.writer = WebPMemoryWrite;
   pic.custom_ptr = &wrt;
 
-  if (config->lossless) {
-    pic.use_argb = 1;
-  } else {
-    pic.use_argb = 0;
-  }
+  // Read the input. We need to decide if we prefer ARGB or YUVA
+  // samples, depending on the expected compression mode (this saves
+  // some conversion steps).
+  pic.use_argb = (config->lossless || config->use_sharp_yuv ||
+                      config->preprocessing > 0);
 
   WebPMemoryWriterInit(&wrt);
 
@@ -352,26 +355,31 @@ JNIEXPORT void JNICALL Java_com_luciad_imageio_webp_WebPEncoderOptions_deleteCon
   free(config);
 }
 
+PROPERTY(WebPEncoderOptions, jboolean, get, set, Lossless, WebPConfig, lossless)
 PROPERTY(WebPEncoderOptions, jfloat, get, set, Quality, WebPConfig, quality)
+PROPERTY(WebPEncoderOptions, jint, get, set, Method, WebPConfig, method)
 PROPERTY(WebPEncoderOptions, jint, get, set, TargetSize, WebPConfig, target_size)
 PROPERTY(WebPEncoderOptions, jfloat, get, set, TargetPSNR, WebPConfig, target_PSNR)
-PROPERTY(WebPEncoderOptions, jint, get, set, Method, WebPConfig, method)
 PROPERTY(WebPEncoderOptions, jint, get, set, Segments, WebPConfig, segments)
 PROPERTY(WebPEncoderOptions, jint, get, set, SnsStrength, WebPConfig, sns_strength)
 PROPERTY(WebPEncoderOptions, jint, get, set, FilterStrength, WebPConfig, filter_strength)
 PROPERTY(WebPEncoderOptions, jint, get, set, FilterSharpness, WebPConfig, filter_sharpness)
 PROPERTY(WebPEncoderOptions, jint, get, set, FilterType, WebPConfig, filter_type)
-PROPERTY(WebPEncoderOptions, jint, get, set, Autofilter, WebPConfig, autofilter)
-PROPERTY(WebPEncoderOptions, jint, get, set, Pass, WebPConfig, pass)
-PROPERTY(WebPEncoderOptions, jint, get, set, ShowCompressed, WebPConfig, show_compressed)
-PROPERTY(WebPEncoderOptions, jint, get, set, Preprocessing, WebPConfig, preprocessing)
-PROPERTY(WebPEncoderOptions, jint, get, set, Partitions, WebPConfig, partitions)
-PROPERTY(WebPEncoderOptions, jint, get, set, PartitionLimit, WebPConfig, partition_limit)
+PROPERTY(WebPEncoderOptions, jboolean, get, set, Autofilter, WebPConfig, autofilter)
 PROPERTY(WebPEncoderOptions, jint, get, set, AlphaCompression, WebPConfig, alpha_compression)
 PROPERTY(WebPEncoderOptions, jint, get, set, AlphaFiltering, WebPConfig, alpha_filtering)
 PROPERTY(WebPEncoderOptions, jint, get, set, AlphaQuality, WebPConfig, alpha_quality)
-PROPERTY(WebPEncoderOptions, jint, get, set, Lossless, WebPConfig, lossless)
-PROPERTY(WebPEncoderOptions, jint, get, set, EmulateJpegSize, WebPConfig, emulate_jpeg_size)
+PROPERTY(WebPEncoderOptions, jint, get, set, Pass, WebPConfig, pass)
+PROPERTY(WebPEncoderOptions, jboolean, get, set, ShowCompressed, WebPConfig, show_compressed)
+PROPERTY(WebPEncoderOptions, jint, get, set, Preprocessing, WebPConfig, preprocessing)
+PROPERTY(WebPEncoderOptions, jint, get, set, Partitions, WebPConfig, partitions)
+PROPERTY(WebPEncoderOptions, jint, get, set, PartitionLimit, WebPConfig, partition_limit)
+PROPERTY(WebPEncoderOptions, jboolean, get, set, EmulateJpegSize, WebPConfig, emulate_jpeg_size)
 PROPERTY(WebPEncoderOptions, jint, get, set, ThreadLevel, WebPConfig, thread_level)
-PROPERTY(WebPEncoderOptions, jint, get, set, LowMemory, WebPConfig, low_memory)
-PROPERTY(WebPEncoderOptions, jint, get, set, UseSharpYUV, WebPConfig, use_sharp_yuv)
+PROPERTY(WebPEncoderOptions, jboolean, get, set, LowMemory, WebPConfig, low_memory)
+PROPERTY(WebPEncoderOptions, jint, get, set, NearLossless, WebPConfig, near_lossless)
+PROPERTY(WebPEncoderOptions, jboolean, get, set, Exact, WebPConfig, exact)
+PROPERTY(WebPEncoderOptions, jboolean, get, set, UseDeltaPalette, WebPConfig, use_delta_palette)
+PROPERTY(WebPEncoderOptions, jboolean, get, set, UseSharpYUV, WebPConfig, use_sharp_yuv)
+PROPERTY(WebPEncoderOptions, jint, get, set, QMax, WebPConfig, qmax)
+PROPERTY(WebPEncoderOptions, jint, get, set, QMin, WebPConfig, qmin)

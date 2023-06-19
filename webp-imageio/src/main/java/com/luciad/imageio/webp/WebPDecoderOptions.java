@@ -16,6 +16,7 @@
 package com.luciad.imageio.webp;
 
 public final class WebPDecoderOptions {
+
   static {
     WebP.loadNativeLibrary();
   }
@@ -36,12 +37,29 @@ public final class WebPDecoderOptions {
     fPointer = 0L;
   }
 
-  public int getCropHeight() {
-    return getCropHeight(fPointer);
+  public boolean getBypassFiltering() {
+    return getBypassFiltering(fPointer);
   }
 
-  public void setCropHeight(int aCropHeight) {
-    setCropHeight(fPointer, aCropHeight);
+  public void setBypassFiltering(boolean aBypassFiltering) {
+    setBypassFiltering(fPointer, aBypassFiltering);
+  }
+
+  public boolean getNoFancyUpsampling() {
+    return getNoFancyUpsampling(fPointer);
+  }
+
+
+  public void setNoFancyUpsampling(boolean aFancyUpsampling) {
+    setNoFancyUpsampling(fPointer, aFancyUpsampling);
+  }
+
+  public boolean getUseCropping() {
+    return getUseCropping(fPointer);
+  }
+
+  public void setUseCropping(boolean aUseCropping) {
+    setUseCropping(fPointer, aUseCropping);
   }
 
   public int getCropLeft() {
@@ -68,20 +86,20 @@ public final class WebPDecoderOptions {
     setCropWidth(fPointer, aCropWidth);
   }
 
-  public boolean isFancyUpsampling() {
-    return !isNoFancyUpsampling(fPointer);
+  public int getCropHeight() {
+    return getCropHeight(fPointer);
   }
 
-  public void setFancyUpsampling(boolean aFancyUpsampling) {
-    setNoFancyUpsampling(fPointer, !aFancyUpsampling);
+  public void setCropHeight(int aCropHeight) {
+    setCropHeight(fPointer, aCropHeight);
   }
 
-  public int getScaledHeight() {
-    return getScaledHeight(fPointer);
+  public boolean getUseScaling() {
+    return getUseScaling(fPointer);
   }
 
-  public void setScaledHeight(int aScaledHeight) {
-    setScaledHeight(fPointer, aScaledHeight);
+  public void setUseScaling(boolean aUseScaling) {
+    setUseScaling(fPointer, aUseScaling);
   }
 
   public int getScaledWidth() {
@@ -92,45 +110,60 @@ public final class WebPDecoderOptions {
     setScaledWidth(fPointer, aScaledWidth);
   }
 
-  public boolean isUseCropping() {
-    return isUseCropping(fPointer);
+  public int getScaledHeight() {
+    return getScaledHeight(fPointer);
   }
 
-  public void setUseCropping(boolean aUseCropping) {
-    setUseCropping(fPointer, aUseCropping);
+  public void setScaledHeight(int aScaledHeight) {
+    setScaledHeight(fPointer, aScaledHeight);
   }
 
-  public boolean isUseScaling() {
-    return isUseScaling(fPointer);
-  }
-
-  public void setUseScaling(boolean aUseScaling) {
-    setUseScaling(fPointer, aUseScaling);
-  }
-
-  public boolean isUseThreads() {
-    return isUseThreads(fPointer);
+  public boolean getUseThreads() {
+    return getUseThreads(fPointer);
   }
 
   public void setUseThreads(boolean aUseThreads) {
     setUseThreads(fPointer, aUseThreads);
   }
 
-  public boolean isBypassFiltering() {
-    return isBypassFiltering(fPointer);
+  public int getDitheringStrength() {
+    return getDitheringStrength(fPointer);
   }
 
-  public void setBypassFiltering(boolean aBypassFiltering) {
-    setBypassFiltering(fPointer, aBypassFiltering);
+  public void setDitheringStrength(int aDitheringStrength) {
+    setDitheringStrength(fPointer, aDitheringStrength);
   }
+
+  public boolean getFlip() {
+    return getFlip(fPointer);
+  }
+
+  public void setFlip(boolean aFlip) {
+    setFlip(fPointer, aFlip);
+  }
+
+  public int getAlphaDitheringStrength() {
+    return getAlphaDitheringStrength(fPointer);
+  }
+
+  public void setAlphaDitheringStrength(int aAlphaDitheringStrength) {
+    setAlphaDitheringStrength(fPointer, aAlphaDitheringStrength);
+  }
+
 
   private static native long createDecoderOptions();
 
   private static native void deleteDecoderOptions(long aPointer);
 
-  private static native int getCropHeight(long aPointer);
+  private static native boolean getBypassFiltering(long aPointer);
 
-  private static native void setCropHeight(long aPointer, int aCropHeight);
+  private static native void setBypassFiltering(long aPointer, boolean aBypassFiltering);
+
+  private static native boolean getNoFancyUpsampling(long aPointer);
+
+  private static native void setNoFancyUpsampling(long aPointer, boolean aNoFancyUpsampling);
+
+  private static native boolean getUseCropping(long aPointer);
 
   private static native int getCropLeft(long aPointer);
 
@@ -140,43 +173,41 @@ public final class WebPDecoderOptions {
 
   private static native void setCropTop(long aPointer, int aCropTop);
 
+  private static native void setUseCropping(long aPointer, boolean aUseCropping);
+
   private static native int getCropWidth(long aPointer);
 
   private static native void setCropWidth(long aPointer, int aCropWidth);
 
-  private static native boolean isForceRotation(long aPointer);
+  private static native int getCropHeight(long aPointer);
 
-  private static native void setForceRotation(long aPointer, boolean aForceRotation);
+  private static native void setCropHeight(long aPointer, int aCropHeight);
 
-  private static native boolean isNoEnhancement(long aPointer);
-
-  private static native void setNoEnhancement(long aPointer, boolean aNoEnhancement);
-
-  private static native boolean isNoFancyUpsampling(long aPointer);
-
-  private static native void setNoFancyUpsampling(long aPointer, boolean aFancyUpsampling);
-
-  private static native int getScaledHeight(long aPointer);
-
-  private static native void setScaledHeight(long aPointer, int aScaledHeight);
+  private static native boolean getUseScaling(long aPointer);
 
   private static native int getScaledWidth(long aPointer);
 
   private static native void setScaledWidth(long aPointer, int aScaledWidth);
 
-  private static native boolean isUseCropping(long aPointer);
-
-  private static native void setUseCropping(long aPointer, boolean aUseCropping);
-
-  private static native boolean isUseScaling(long aPointer);
-
   private static native void setUseScaling(long aPointer, boolean aUseScaling);
 
-  private static native boolean isUseThreads(long aPointer);
+  private static native int getScaledHeight(long aPointer);
+
+  private static native void setScaledHeight(long aPointer, int aScaledHeight);
+
+  private static native boolean getUseThreads(long aPointer);
 
   private static native void setUseThreads(long aPointer, boolean aUseThreads);
 
-  private static native boolean isBypassFiltering(long aPointer);
+  private static native int getDitheringStrength(long aPointer);
 
-  private static native void setBypassFiltering(long aPointer, boolean aBypassFiltering);
+  private static native void setDitheringStrength(long aPointer, int aDitheringStrength);
+
+  private static native boolean getFlip(long aPointer);
+
+  private static native void setFlip(long aPointer, boolean aFlip);
+
+  private static native int getAlphaDitheringStrength(long aPointer);
+
+  private static native void setAlphaDitheringStrength(long aPointer, int aAlphaDitheringStrength);
 }
