@@ -1,0 +1,215 @@
+public final class com/luciad/imageio/webp/WebP {
+	public static fun decode (Lcom/luciad/imageio/webp/WebPDecoderOptions;[BII[I)[I
+	public static fun encodeRGB (Lcom/luciad/imageio/webp/WebPEncoderOptions;[BIII)[B
+	public static fun encodeRGBA (Lcom/luciad/imageio/webp/WebPEncoderOptions;[BIII)[B
+	public static fun getInfo ([BII)[I
+	public static fun loadNativeLibrary ()V
+}
+
+public final class com/luciad/imageio/webp/WebPDecoderOptions {
+	public fun <init> ()V
+	public fun getAlphaDitheringStrength ()I
+	public fun getBypassFiltering ()Z
+	public fun getCropHeight ()I
+	public fun getCropLeft ()I
+	public fun getCropTop ()I
+	public fun getCropWidth ()I
+	public fun getDitheringStrength ()I
+	public fun getFlip ()Z
+	public fun getNoFancyUpsampling ()Z
+	public fun getScaledHeight ()I
+	public fun getScaledWidth ()I
+	public fun getUseCropping ()Z
+	public fun getUseScaling ()Z
+	public fun getUseThreads ()Z
+	public fun setAlphaDitheringStrength (I)V
+	public fun setBypassFiltering (Z)V
+	public fun setCropHeight (I)V
+	public fun setCropLeft (I)V
+	public fun setCropTop (I)V
+	public fun setCropWidth (I)V
+	public fun setDitheringStrength (I)V
+	public fun setFlip (Z)V
+	public fun setNoFancyUpsampling (Z)V
+	public fun setScaledHeight (I)V
+	public fun setScaledWidth (I)V
+	public fun setUseCropping (Z)V
+	public fun setUseScaling (Z)V
+	public fun setUseThreads (Z)V
+}
+
+public class com/luciad/imageio/webp/WebPEncoderOptions {
+	public fun <init> ()V
+	protected fun finalize ()V
+	public fun getAlphaCompressionAlgorithm ()I
+	public fun getAlphaFiltering ()I
+	public fun getAlphaQuality ()I
+	public fun getAutoAdjustFilterStrength ()Z
+	public fun getCompressionQuality ()F
+	public fun getEmulateJpegSize ()Z
+	public fun getEntropyAnalysisPassCount ()I
+	public fun getExact ()Z
+	public fun getFilterSharpness ()I
+	public fun getFilterStrength ()I
+	public fun getFilterType ()I
+	public fun getLossless ()Z
+	public fun getLowMemory ()Z
+	public fun getMethod ()I
+	public fun getNearLossless ()I
+	public fun getPartitionLimit ()I
+	public fun getPartitions ()I
+	public fun getPreprocessing ()I
+	public fun getQMax ()I
+	public fun getQMin ()I
+	public fun getSegments ()I
+	public fun getShowCompressed ()Z
+	public fun getSnsStrength ()I
+	public fun getTargetPSNR ()F
+	public fun getTargetSize ()I
+	public fun getThreadLevel ()I
+	public fun getUseDeltaPalette ()Z
+	public fun getUseSharpYUV ()Z
+	public fun setAlphaCompressionAlgorithm (I)V
+	public fun setAlphaFiltering (I)V
+	public fun setAlphaQuality (I)V
+	public fun setAutoAdjustFilterStrength (Z)V
+	public fun setCompressionQuality (F)V
+	public fun setEmulateJpegSize (Z)V
+	public fun setEntropyAnalysisPassCount (I)V
+	public fun setExact (Z)V
+	public fun setFilterSharpness (I)V
+	public fun setFilterStrength (I)V
+	public fun setFilterType (I)V
+	public fun setLossless (Z)V
+	public fun setLowMemory (Z)V
+	public fun setMethod (I)V
+	public fun setNearLossless (I)V
+	public fun setPartitionLimit (I)V
+	public fun setPartitions (I)V
+	public fun setPreprocessing (I)V
+	public fun setQMax (I)V
+	public fun setQMin (I)V
+	public fun setSegments (I)V
+	public fun setShowCompressed (Z)V
+	public fun setSnsStrength (I)V
+	public fun setTargetPSNR (F)V
+	public fun setTargetSize (I)V
+	public fun setThreadLevel (I)V
+	public fun setUseDeltaPalette (Z)V
+	public fun setUseSharpYUV (Z)V
+}
+
+public class com/luciad/imageio/webp/WebPImageReaderSpi : javax/imageio/spi/ImageReaderSpi {
+	public fun <init> ()V
+	public fun canDecodeInput (Ljava/lang/Object;)Z
+	public fun createReaderInstance (Ljava/lang/Object;)Ljavax/imageio/ImageReader;
+	public fun getDescription (Ljava/util/Locale;)Ljava/lang/String;
+}
+
+public class com/luciad/imageio/webp/WebPImageWriterSpi : javax/imageio/spi/ImageWriterSpi {
+	public fun <init> ()V
+	public fun canEncodeImage (Ljavax/imageio/ImageTypeSpecifier;)Z
+	public fun createWriterInstance (Ljava/lang/Object;)Ljavax/imageio/ImageWriter;
+	public fun getDescription (Ljava/util/Locale;)Ljava/lang/String;
+}
+
+public final class com/luciad/imageio/webp/WebPReadParam : javax/imageio/ImageReadParam {
+	public fun <init> ()V
+	public fun getAlphaDitheringStrength ()I
+	public fun getBypassFiltering ()Z
+	public fun getCropHeight ()I
+	public fun getCropLeft ()I
+	public fun getCropTop ()I
+	public fun getCropWidth ()I
+	public fun getDitheringStrength ()I
+	public fun getFlipVertically ()Z
+	public fun getNoFancyUpsampling ()Z
+	public fun getScaledHeight ()I
+	public fun getScaledWidth ()I
+	public fun getUseCropping ()Z
+	public fun getUseScaling ()Z
+	public fun getUseThreads ()Z
+	public fun setAlphaDitheringStrength (I)V
+	public fun setBypassFiltering (Z)V
+	public fun setCropHeight (I)V
+	public fun setCropLeft (I)V
+	public fun setCropTop (I)V
+	public fun setCropWidth (I)V
+	public fun setDitheringStrength (I)V
+	public fun setFlipVertically (Z)V
+	public fun setNoFancyUpsampling (Z)V
+	public fun setScaledHeight (I)V
+	public fun setScaledWidth (I)V
+	public fun setUseCropping (Z)V
+	public fun setUseScaling (Z)V
+	public fun setUseThreads (Z)V
+}
+
+public class com/luciad/imageio/webp/WebPWriteParam : javax/imageio/ImageWriteParam {
+	public static final field LOSSLESS_COMPRESSION I
+	public static final field LOSSY_COMPRESSION I
+	public fun <init> (Ljava/util/Locale;)V
+	public fun getAlphaCompressionAlgorithm ()I
+	public fun getAlphaFiltering ()I
+	public fun getAlphaQuality ()I
+	public fun getAutoAdjustFilterStrength ()Z
+	public fun getCompressionQuality ()F
+	public fun getEmulateJpegSize ()Z
+	public fun getEntropyAnalysisPassCount ()I
+	public fun getExact ()Z
+	public fun getFilterSharpness ()I
+	public fun getFilterStrength ()I
+	public fun getFilterType ()I
+	public fun getLowMemory ()Z
+	public fun getMethod ()I
+	public fun getNearLossless ()I
+	public fun getPartitionLimit ()I
+	public fun getPartitions ()I
+	public fun getPreprocessing ()I
+	public fun getQMax ()I
+	public fun getQMin ()I
+	public fun getSegments ()I
+	public fun getShowCompressed ()Z
+	public fun getSnsStrength ()I
+	public fun getTargetPSNR ()F
+	public fun getTargetSize ()I
+	public fun getThreadLevel ()I
+	public fun getUseDeltaPalette ()Z
+	public fun getUseSharpYUV ()Z
+	public fun setAlphaCompressionAlgorithm (I)V
+	public fun setAlphaFiltering (I)V
+	public fun setAlphaQuality (I)V
+	public fun setAutoAdjustFilterStrength (Z)V
+	public fun setCompressionQuality (F)V
+	public fun setCompressionType (Ljava/lang/String;)V
+	public fun setEmulateJpegSize (Z)V
+	public fun setEntropyAnalysisPassCount (I)V
+	public fun setExact (Z)V
+	public fun setFilterSharpness (I)V
+	public fun setFilterStrength (I)V
+	public fun setFilterType (I)V
+	public fun setLowMemory (Z)V
+	public fun setMethod (I)V
+	public fun setNearLossless (I)V
+	public fun setPartitionLimit (I)V
+	public fun setPartitions (I)V
+	public fun setPreprocessing (I)V
+	public fun setQMax (I)V
+	public fun setQMin (I)V
+	public fun setSegments (I)V
+	public fun setShowCompressed (Z)V
+	public fun setSnsStrength (I)V
+	public fun setTargetPSNR (F)V
+	public fun setTargetSize (I)V
+	public fun setThreadLevel (I)V
+	public fun setUseDeltaPalette (Z)V
+	public fun setUseSharpYUV (Z)V
+	public fun unsetCompression ()V
+}
+
+public class com/luciad/imageio/webp/internal/NativeLoader {
+	public fun <init> ()V
+	public static fun getVersion ()Ljava/lang/String;
+	public static fun initialize ()Z
+}
+
