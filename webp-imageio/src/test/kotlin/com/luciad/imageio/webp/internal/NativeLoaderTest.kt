@@ -4,12 +4,15 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.util.logging.Logger
 
 class NativeLoaderTest {
 
+    private val log = Logger.getLogger(NativeLoaderTest::class.java.name)
+
     @BeforeEach
     fun setUp() {
-        NativeLoader.initialize()
+        check(NativeLoader.initialize())
     }
 
     @AfterEach
@@ -19,6 +22,7 @@ class NativeLoaderTest {
 
     @Test
     fun checkVersion() {
+        log.info("Native version is: ${NativeLoader.getVersion()}")
         assertThat(NativeLoader.getVersion()).isNotEqualTo("unknown")
     }
 }
