@@ -22,7 +22,9 @@
 // $URL$ 
 // $Author$
 //--------------------------------------
-package com.luciad.imageio.webp.util;
+package com.luciad.imageio.webp.internal;
+
+import androidx.annotation.RestrictTo;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -35,7 +37,7 @@ import java.util.Locale;
  *
  * @author leo
  */
-public class OSInfo {
+class OSInfo {
   private static final HashMap<String, String> archMapping = new HashMap<>();
 
   public static final String X86 = "x86";

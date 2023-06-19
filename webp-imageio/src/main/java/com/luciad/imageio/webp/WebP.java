@@ -15,6 +15,8 @@
  */
 package com.luciad.imageio.webp;
 
+import com.luciad.imageio.webp.internal.NativeLoader;
+
 import java.io.IOException;
 import java.nio.ByteOrder;
 

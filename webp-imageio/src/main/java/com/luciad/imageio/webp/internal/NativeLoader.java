@@ -22,10 +22,7 @@
 // $URL$
 // $Author$
 //--------------------------------------
-package com.luciad.imageio.webp;
-
-import com.luciad.imageio.webp.util.OSInfo;
-import com.luciad.imageio.webp.util.StringUtils;
+package com.luciad.imageio.webp.internal;
 
 import java.io.BufferedInputStream;
 import java.io.File;

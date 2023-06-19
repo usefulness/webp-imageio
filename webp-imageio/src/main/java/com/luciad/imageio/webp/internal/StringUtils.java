@@ -1,8 +1,8 @@
-package com.luciad.imageio.webp.util;
+package com.luciad.imageio.webp.internal;
 
 import java.util.List;
 
-public class StringUtils {
+class StringUtils {
   public static String join(List<String> list, String separator) {
     StringBuilder sb = new StringBuilder();
     boolean first = true;

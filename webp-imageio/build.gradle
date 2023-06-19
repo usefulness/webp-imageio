@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 plugins {
     alias(libs.plugins.starter.library.kotlin)
     id("com.starter.publishing")
+    alias(libs.plugins.kotlinx.binarycompatibility)
 }
 
 tasks.withType(Test).configureEach {

@@ -1,6 +1,5 @@
-package com.luciad.imageio.webp
+package com.luciad.imageio.webp.internal
 
-import com.luciad.imageio.webp.util.OSInfo
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
