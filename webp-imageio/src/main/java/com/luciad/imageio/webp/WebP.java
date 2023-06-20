@@ -20,7 +20,7 @@ import com.luciad.imageio.webp.internal.NativeLoader;
 import java.io.IOException;
 import java.nio.ByteOrder;
 
-public final class WebP {
+final class WebP {
   private static boolean NATIVE_LIBRARY_LOADED = false;
 
   public static synchronized void loadNativeLibrary() {
@@ -32,11 +32,6 @@ public final class WebP {
       }
       NATIVE_LIBRARY_LOADED = true;
     }
-  }
-
-  // TODO: lazy load native library
-  static {
-    loadNativeLibrary();
   }
 
   private WebP() {

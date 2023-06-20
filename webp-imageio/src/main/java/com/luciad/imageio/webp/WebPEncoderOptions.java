@@ -16,11 +16,7 @@
 package com.luciad.imageio.webp;
 
 
-public class WebPEncoderOptions {
-
-  static {
-    WebP.loadNativeLibrary();
-  }
+final class WebPEncoderOptions implements AutoCloseable {
 
   long fPointer;
 
@@ -34,6 +30,11 @@ public class WebPEncoderOptions {
   @Override
   protected void finalize() throws Throwable {
     super.finalize();
+    close();
+  }
+
+  @Override
+  public void close() {
     deleteConfig(fPointer);
     fPointer = 0L;
   }

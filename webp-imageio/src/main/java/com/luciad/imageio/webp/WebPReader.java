@@ -51,7 +51,7 @@ class WebPReader extends ImageReader {
   }
 
   @Override
-  public int getNumImages(boolean allowSearch) throws IOException {
+  public int getNumImages(boolean allowSearch) {
     return 1;
   }
 
@@ -123,17 +123,17 @@ class WebPReader extends ImageReader {
   }
 
   @Override
-  public IIOMetadata getStreamMetadata() throws IOException {
+  public IIOMetadata getStreamMetadata() {
     return null;
   }
 
   @Override
-  public IIOMetadata getImageMetadata(int imageIndex) throws IOException {
+  public IIOMetadata getImageMetadata(int imageIndex) {
     return null;
   }
 
   @Override
-  public Iterator<ImageTypeSpecifier> getImageTypes(int imageIndex) throws IOException {
+  public Iterator<ImageTypeSpecifier> getImageTypes(int imageIndex) {
     return Collections.singletonList(
         ImageTypeSpecifier.createFromBufferedImageType(BufferedImage.TYPE_INT_ARGB)
     ).iterator();
@@ -169,6 +169,6 @@ class WebPReader extends ImageReader {
     DataBufferInt db = new DataBufferInt(pixels, width * height);
     WritableRaster raster = WritableRaster.createWritableRaster(sampleModel, db, null);
 
-    return new BufferedImage(colorModel, raster, false, new Hashtable<Object, Object>());
+    return new BufferedImage(colorModel, raster, false, new Hashtable<>());
   }
 }

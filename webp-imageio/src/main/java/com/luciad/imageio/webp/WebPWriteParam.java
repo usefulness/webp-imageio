@@ -22,6 +22,11 @@ import javax.imageio.ImageWriteParam;
 import java.util.Locale;
 
 public class WebPWriteParam extends ImageWriteParam {
+
+  static {
+    WebP.loadNativeLibrary();
+  }
+
   public static final int LOSSY_COMPRESSION = 0;
   public static final int LOSSLESS_COMPRESSION = 1;
 

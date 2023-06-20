@@ -28,7 +28,7 @@ enum VP8StatusCode {
 
   private static VP8StatusCode[] VALUES = values();
 
-  public static VP8StatusCode getStatusCode(int aValue) {
+  static VP8StatusCode getStatusCode(int aValue) {
     if (aValue >= 0 && aValue < VALUES.length) {
       return VALUES[aValue];
     } else {
