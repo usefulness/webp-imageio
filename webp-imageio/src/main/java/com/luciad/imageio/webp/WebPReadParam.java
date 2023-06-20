@@ -22,6 +22,10 @@ import javax.imageio.ImageReadParam;
 public final class WebPReadParam extends ImageReadParam {
   private final WebPDecoderOptions fOptions;
 
+  static {
+    WebPWrapper.loadNativeLibrary();
+  }
+
   public WebPReadParam() {
     fOptions = new WebPDecoderOptions();
   }

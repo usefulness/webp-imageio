@@ -24,8 +24,6 @@
 //--------------------------------------
 package com.luciad.imageio.webp.internal;
 
-import androidx.annotation.RestrictTo;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;

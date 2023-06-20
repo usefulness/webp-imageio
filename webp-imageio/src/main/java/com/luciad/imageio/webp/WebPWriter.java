@@ -22,10 +22,18 @@ import javax.imageio.ImageWriter;
 import javax.imageio.metadata.IIOMetadata;
 import javax.imageio.spi.ImageWriterSpi;
 import javax.imageio.stream.ImageOutputStream;
-
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.ComponentColorModel;
+import java.awt.image.ComponentSampleModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferByte;
+import java.awt.image.DataBufferInt;
+import java.awt.image.DirectColorModel;
+import java.awt.image.RenderedImage;
+import java.awt.image.SinglePixelPackedSampleModel;
 import java.io.IOException;
 
 class WebPWriter extends ImageWriter {
@@ -94,10 +102,10 @@ class WebPWriter extends ImageWriter {
       boolean encodeAlpha = hasTranslucency(aImage);
       if (encodeAlpha) {
         byte[] rgbaData = getRGBA(aImage);
-        pixels = WebP.encodeRGBA(aOptions, rgbaData, aImage.getWidth(), aImage.getHeight(), aImage.getWidth() * 4);
+        pixels = WebPWrapper.encodeRGBA(aOptions, rgbaData, aImage.getWidth(), aImage.getHeight(), aImage.getWidth() * 4);
       } else {
         byte[] rgbData = getRGB(aImage);
-        pixels = WebP.encodeRGB(aOptions, rgbData, aImage.getWidth(), aImage.getHeight(), aImage.getWidth() * 3);
+        pixels = WebPWrapper.encodeRGB(aOptions, rgbData, aImage.getWidth(), aImage.getHeight(), aImage.getWidth() * 3);
       }
       return pixels;
     } finally {
