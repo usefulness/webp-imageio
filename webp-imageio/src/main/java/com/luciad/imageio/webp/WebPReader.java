@@ -61,7 +61,7 @@ class WebPReader extends ImageReader {
     }
 
     readData();
-    int[] info = WebP.getInfo(fData, 0, fData.length);
+    int[] info = WebPWrapper.getInfo(fData, 0, fData.length);
     fWidth = info[0];
     fHeight = info[1];
   }
@@ -152,7 +152,7 @@ class WebPReader extends ImageReader {
     WebPReadParam readParam = param != null ? (WebPReadParam) param : new WebPReadParam();
 
     int[] outParams = new int[4];
-    int[] pixels = WebP.decode(readParam.getDecoderOptions(), fData, 0, fData.length, outParams);
+    int[] pixels = WebPWrapper.decode(readParam.getDecoderOptions(), fData, 0, fData.length, outParams);
 
     int width = outParams[1];
     int height = outParams[2];

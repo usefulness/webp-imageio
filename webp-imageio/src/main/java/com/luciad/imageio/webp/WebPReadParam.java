@@ -23,7 +23,7 @@ public final class WebPReadParam extends ImageReadParam {
   private final WebPDecoderOptions fOptions;
 
   static {
-    WebP.loadNativeLibrary();
+    WebPWrapper.loadNativeLibrary();
   }
 
   public WebPReadParam() {

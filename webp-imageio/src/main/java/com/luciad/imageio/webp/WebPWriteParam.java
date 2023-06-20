@@ -24,7 +24,7 @@ import java.util.Locale;
 public class WebPWriteParam extends ImageWriteParam {
 
   static {
-    WebP.loadNativeLibrary();
+    WebPWrapper.loadNativeLibrary();
   }
 
   public static final int LOSSY_COMPRESSION = 0;

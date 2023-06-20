@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-set -e -o pipefail
+set -ex -o pipefail
+
+./generate-headers.sh
 
 # Ensure clean build environments
 rm -rf build

@@ -102,10 +102,10 @@ class WebPWriter extends ImageWriter {
       boolean encodeAlpha = hasTranslucency(aImage);
       if (encodeAlpha) {
         byte[] rgbaData = getRGBA(aImage);
-        pixels = WebP.encodeRGBA(aOptions, rgbaData, aImage.getWidth(), aImage.getHeight(), aImage.getWidth() * 4);
+        pixels = WebPWrapper.encodeRGBA(aOptions, rgbaData, aImage.getWidth(), aImage.getHeight(), aImage.getWidth() * 4);
       } else {
         byte[] rgbData = getRGB(aImage);
-        pixels = WebP.encodeRGB(aOptions, rgbData, aImage.getWidth(), aImage.getHeight(), aImage.getWidth() * 3);
+        pixels = WebPWrapper.encodeRGB(aOptions, rgbData, aImage.getWidth(), aImage.getHeight(), aImage.getWidth() * 3);
       }
       return pixels;
     } finally {
