@@ -5,7 +5,7 @@
 
 ## Description
 
-[Java Image I/O](https://docs.oracle.com/javase/7/docs/api/javax/imageio/package-summary.html) reader and writer for the
+[Java Image I/O](https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/javax/imageio/package-summary.html) reader and writer for the
 [Google WebP](https://developers.google.com/speed/webp/) image format.
 
 ### Highlights:
