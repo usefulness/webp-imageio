@@ -285,7 +285,7 @@ public class NativeLoader {
    */
   public static String getVersion() {
 
-    URL versionFile = NativeLoader.class.getClassLoader().getResource("version.properties");
+    URL versionFile = NativeLoader.class.getClassLoader().getResource("webp-imageio.properties");
 
     String version = "unknown";
     try {
