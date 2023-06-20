@@ -29,7 +29,7 @@ kotlin {
 
 tasks.register("generateVersionProperties") {
     def projectVersion = version
-    def propertiesFile = new File(sourceSets.main.output.resourcesDir, "version.properties")
+    def propertiesFile = new File(sourceSets.main.output.resourcesDir, "webp-imageio.properties")
     inputs.property("projectVersion", projectVersion)
     outputs.file(propertiesFile)
 
