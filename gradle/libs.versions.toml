@@ -4,8 +4,8 @@ gradle-doctor = "0.8.1"
 maven-junit = "5.9.3"
 maven-assertj = "3.24.2"
 maven-commons = "2.13.0"
-google-annotations = "1.6.0"
 maven-binarycompatiblity = "0.13.2"
+maven-dokka = "1.8.20"
 
 [libraries]
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin" }
@@ -13,7 +13,7 @@ junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.re
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "maven-junit" }
 assertj-core = { module = "org.assertj:assertj-core", version.ref = "maven-assertj" }
 commons-io = { module = "commons-io:commons-io", version.ref = "maven-commons" }
-androidx-annotations = { module = "androidx.annotation:annotation", version.ref = "google-annotations" }
+jetbrains-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "maven-dokka" }
 
 [plugins]
 starter-config = { id = "com.starter.config", version.ref = "gradle-starter" }

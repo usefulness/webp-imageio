@@ -37,6 +37,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "com.github.usefulness"
 
-include("webp-imageio")
-
 includeBuild("gradle/plugins")
+include("webp-imageio")

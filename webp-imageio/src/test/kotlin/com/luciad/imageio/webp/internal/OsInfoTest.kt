@@ -10,7 +10,7 @@ class OsInfoTest {
 
     @Test
     fun smokeTest() {
-        log.info("Native lib folder path for current OS is: ${OSInfo.getNativeLibFolderPathForCurrentOS()}")
-        assertThat(OSInfo.getNativeLibFolderPathForCurrentOS()).isNotEqualTo("/")
+        log.info("Native lib folder path for current OS is: ${OsInfo.nativeLibFolderPathForCurrentOS}")
+        assertThat(OsInfo.nativeLibFolderPathForCurrentOS).isNotEqualTo("/")
     }
 }

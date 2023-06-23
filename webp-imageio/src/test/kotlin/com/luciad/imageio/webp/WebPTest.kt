@@ -112,7 +112,7 @@ class WebPTest {
             input = image,
             target = imageOut,
             params = {
-                compressionType = "Lossless"
+                compressionType = CompressionType.Lossless
             },
         )
         imageOut.close()
@@ -165,7 +165,7 @@ class WebPTest {
             target = outputFile,
             params = {
                 compressionQuality = 1f
-                compressionType = compressionTypes[WebPWriteParam.LOSSY_COMPRESSION]
+                compressionType = CompressionType.Lossy
                 method = 6
                 targetSize = 0
                 targetPSNR = 0f
@@ -203,7 +203,7 @@ class WebPTest {
         val outputFileDefault = tempDir.resolve("output_default.webp").toFile()
 
         fun WebPWriteParam.prepareParams() {
-            compressionType = compressionTypes[WebPWriteParam.LOSSY_COMPRESSION]
+            compressionType = CompressionType.Lossy
             compressionQuality = 0.95f
         }
         writeWebpImage(

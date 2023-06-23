@@ -1,3 +1,10 @@
+public final class com/luciad/imageio/webp/CompressionType : java/lang/Enum {
+	public static final field Lossless Lcom/luciad/imageio/webp/CompressionType;
+	public static final field Lossy Lcom/luciad/imageio/webp/CompressionType;
+	public static fun valueOf (Ljava/lang/String;)Lcom/luciad/imageio/webp/CompressionType;
+	public static fun values ()[Lcom/luciad/imageio/webp/CompressionType;
+}
+
 public class com/luciad/imageio/webp/WebPImageReaderSpi : javax/imageio/spi/ImageReaderSpi {
 	public fun <init> ()V
 	public fun canDecodeInput (Ljava/lang/Object;)Z
@@ -14,45 +21,50 @@ public class com/luciad/imageio/webp/WebPImageWriterSpi : javax/imageio/spi/Imag
 
 public final class com/luciad/imageio/webp/WebPReadParam : javax/imageio/ImageReadParam {
 	public fun <init> ()V
-	public fun getAlphaDitheringStrength ()I
-	public fun getBypassFiltering ()Z
-	public fun getCropHeight ()I
-	public fun getCropLeft ()I
-	public fun getCropTop ()I
-	public fun getCropWidth ()I
-	public fun getDitheringStrength ()I
-	public fun getFlipVertically ()Z
-	public fun getNoFancyUpsampling ()Z
-	public fun getScaledHeight ()I
-	public fun getScaledWidth ()I
-	public fun getUseCropping ()Z
-	public fun getUseScaling ()Z
-	public fun getUseThreads ()Z
-	public fun setAlphaDitheringStrength (I)V
-	public fun setBypassFiltering (Z)V
-	public fun setCropHeight (I)V
-	public fun setCropLeft (I)V
-	public fun setCropTop (I)V
-	public fun setCropWidth (I)V
-	public fun setDitheringStrength (I)V
-	public fun setFlipVertically (Z)V
-	public fun setNoFancyUpsampling (Z)V
-	public fun setScaledHeight (I)V
-	public fun setScaledWidth (I)V
-	public fun setUseCropping (Z)V
-	public fun setUseScaling (Z)V
-	public fun setUseThreads (Z)V
+	public final fun getAlphaDitheringStrength ()I
+	public final fun getBypassFiltering ()Z
+	public final fun getCropHeight ()I
+	public final fun getCropLeft ()I
+	public final fun getCropTop ()I
+	public final fun getCropWidth ()I
+	public final fun getDitheringStrength ()I
+	public final fun getFlipVertically ()Z
+	public final fun getNoFancyUpsampling ()Z
+	public final fun getScaledHeight ()I
+	public final fun getScaledWidth ()I
+	public final fun getUseCropping ()Z
+	public final fun getUseScaling ()Z
+	public final fun getUseThreads ()Z
+	public final fun setAlphaDitheringStrength (I)V
+	public final fun setBypassFiltering (Z)V
+	public final fun setCropHeight (I)V
+	public final fun setCropLeft (I)V
+	public final fun setCropTop (I)V
+	public final fun setCropWidth (I)V
+	public final fun setDitheringStrength (I)V
+	public final fun setFlipVertically (Z)V
+	public final fun setNoFancyUpsampling (Z)V
+	public final fun setScaledHeight (I)V
+	public final fun setScaledWidth (I)V
+	public final fun setUseCropping (Z)V
+	public final fun setUseScaling (Z)V
+	public final fun setUseThreads (Z)V
 }
 
 public class com/luciad/imageio/webp/WebPWriteParam : javax/imageio/ImageWriteParam {
+	public static final field Companion Lcom/luciad/imageio/webp/WebPWriteParam$Companion;
 	public static final field LOSSLESS_COMPRESSION I
 	public static final field LOSSY_COMPRESSION I
+	public static final field PREPROCESSING_FILTER_NONE I
+	public static final field PREPROCESSING_FILTER_PSEUDO_RANDOM_DITHERING I
+	public static final field PREPROCESSING_FILTER_SEGMENT_SMOOTH I
 	public fun <init> (Ljava/util/Locale;)V
 	public fun getAlphaCompressionAlgorithm ()I
 	public fun getAlphaFiltering ()I
 	public fun getAlphaQuality ()I
 	public fun getAutoAdjustFilterStrength ()Z
 	public fun getCompressionQuality ()F
+	public final fun getCompressionType ()Lcom/luciad/imageio/webp/CompressionType;
 	public fun getEmulateJpegSize ()Z
 	public fun getEntropyAnalysisPassCount ()I
 	public fun getExact ()Z
@@ -80,6 +92,7 @@ public class com/luciad/imageio/webp/WebPWriteParam : javax/imageio/ImageWritePa
 	public fun setAlphaQuality (I)V
 	public fun setAutoAdjustFilterStrength (Z)V
 	public fun setCompressionQuality (F)V
+	public final fun setCompressionType (Lcom/luciad/imageio/webp/CompressionType;)V
 	public fun setCompressionType (Ljava/lang/String;)V
 	public fun setEmulateJpegSize (Z)V
 	public fun setEntropyAnalysisPassCount (I)V
@@ -106,9 +119,6 @@ public class com/luciad/imageio/webp/WebPWriteParam : javax/imageio/ImageWritePa
 	public fun unsetCompression ()V
 }
 
-public class com/luciad/imageio/webp/internal/NativeLoader {
-	public fun <init> ()V
-	public static fun getVersion ()Ljava/lang/String;
-	public static fun initialize ()Z
+public final class com/luciad/imageio/webp/WebPWriteParam$Companion {
 }
 

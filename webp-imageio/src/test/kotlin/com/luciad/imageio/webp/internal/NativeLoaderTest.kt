@@ -22,7 +22,7 @@ class NativeLoaderTest {
 
     @Test
     fun checkVersion() {
-        log.info("Native version is: ${NativeLoader.getVersion()}")
-        assertThat(NativeLoader.getVersion()).isNotEqualTo("unknown")
+        log.info("Native version is: ${NativeLoader.version}")
+        assertThat(NativeLoader.version).isNotEqualTo("unknown")
     }
 }
