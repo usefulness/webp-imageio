@@ -13,18 +13,20 @@ tasks.withType(Test).configureEach {
 def targetJavaVersion = JavaVersion.VERSION_1_8
 tasks.withType(JavaCompile).configureEach {
     options.release.set(targetJavaVersion.majorVersion.toInteger())
+    options.headerOutputDirectory.set(rootProject.file("libwebp-jni/src/main/c"))
 }
 tasks.withType(KotlinCompile).configureEach {
     kotlinOptions.jvmTarget = targetJavaVersion
 }
 tasks.withType(Javadoc).configureEach {
+    failOnError = false
     options {
         addStringOption("Xdoclint:none", "-quiet")
     }
 }
-
 kotlin {
     jvmToolchain(17)
+    explicitApi()
 }
 
 tasks.register("generateVersionProperties") {
@@ -63,7 +65,6 @@ tasks.named("processResources") {
 }
 
 dependencies {
-    compileOnly(libs.androidx.annotations)
     testImplementation(libs.assertj.core)
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.junit.jupiter.api)

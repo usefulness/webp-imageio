@@ -4,7 +4,9 @@ import org.gradle.api.plugins.ExtensionContainer
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.jvm.tasks.Jar
 import org.gradle.plugins.signing.SigningExtension
+import org.jetbrains.dokka.gradle.DokkaTask
 
 class PublishingPlugin : Plugin<Project> {
 
@@ -18,6 +20,18 @@ class PublishingPlugin : Plugin<Project> {
             withSourcesJar()
             withJavadocJar()
         }
+
+        pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+            pluginManager.apply("org.jetbrains.dokka")
+
+            tasks.withType(DokkaTask::class.java).configureEach { dokkaTask ->
+                dokkaTask.notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
+            }
+            tasks.named("javadocJar", Jar::class.java) { javadocJar ->
+                javadocJar.from(tasks.named("dokkaJavadoc"))
+            }
+        }
+
         extensions.configure<PublishingExtension> {
             with(repositories) {
                 maven { maven ->

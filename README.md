@@ -1,4 +1,4 @@
-# web-imageio
+# webp-imageio
 
 [![Build](https://github.com/usefulness/webp-imageio/actions/workflows/after_merge.yml/badge.svg?branch=master)](https://github.com/usefulness/webp-imageio/actions/workflows/after_merge.yml)
 ![Maven Central](https://img.shields.io/maven-central/v/com.github.usefulness/webp-imageio)
@@ -11,6 +11,7 @@
 ### Highlights:
 - `macos-aarch64` architecture support (ARM chipsets from Apple, M1, M2) ✅
 - Sharp YUV option support ✅
+- Written in Kotlin
 
 ### Supported platforms
 
@@ -57,6 +58,21 @@ Encoding is done in a similar way to decoding.
 
 You can either use the Image I/O convenience methods to encode using default settings.
 
+<details open>
+<summary>Kotlin</summary>
+
+```kotlin
+// Obtain an image to encode from somewhere
+val image = ImageIO.read(File("input.png"))
+
+// Encode it as webp using default settings
+ImageIO.write(image, "webp", File("output.webp"))
+```
+</details>
+
+<details>
+<summary>Java</summary>
+
 ```java
 // Obtain an image to encode from somewhere
 BufferedImage image = ImageIO.read(new File("input.png"));
@@ -64,8 +80,37 @@ BufferedImage image = ImageIO.read(new File("input.png"));
 // Encode it as webp using default settings
 ImageIO.write(image, "webp", new File("output.webp"));
 ```
+</details>
 
 Or you can create an instance of ImageWriter and WebPWriteParam to use custom settings.
+
+<details open>
+<summary>Kotlin</summary>
+
+```kotlin
+// Obtain an image to encode from somewhere
+val image = ImageIO.read(File("input.png"))
+
+// Obtain a WebP ImageWriter instance
+val writer = ImageIO.getImageWritersByMIMEType("image/webp").next()
+
+// Configure encoding parameters
+val writeParam = (writer.defaultWriteParam as WebPWriteParam).apply {
+    compressionType = CompressionType.Lossy
+    alphaCompressionAlgorithm = 1
+    useSharpYUV = true
+}
+
+// Configure the output on the ImageWriter
+writer.output = FileImageOutputStream(File("output.webp"))
+
+// Encode
+writer.write(null, IIOImage(image, null, null), writeParam)
+```
+</details>
+
+<details>
+<summary>Java</summary>
 
 ```java
 // Obtain an image to encode from somewhere
@@ -75,9 +120,10 @@ BufferedImage image = ImageIO.read(new File("input.png"));
 ImageWriter writer = ImageIO.getImageWritersByMIMEType("image/webp").next();
 
 // Configure encoding parameters
-WebPWriteParam writeParam = new WebPWriteParam(writer.getLocale());
-writeParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-writeParam.setCompressionType(writeParam.getCompressionTypes()[WebPWriteParam.LOSSLESS_COMPRESSION]);
+WebPWriteParam writeParam = ((WebPWriteParam) writer.getDefaultWriteParam());
+writeParam.setCompressionType(CompressionType.Lossy);
+writeParam.setAlphaCompressionAlgorithm(3);
+writeParam.setUseSharpYUV(true);
 
 // Configure the output on the ImageWriter
 writer.setOutput(new FileImageOutputStream(new File("output.webp")));
@@ -85,6 +131,7 @@ writer.setOutput(new FileImageOutputStream(new File("output.webp")));
 // Encode
 writer.write(null, new IIOImage(image, null, null), writeParam);
 ```
+</details>
 
 ## License
 

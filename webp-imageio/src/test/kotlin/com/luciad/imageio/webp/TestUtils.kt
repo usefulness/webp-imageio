@@ -20,11 +20,7 @@ private object ResourcesLoader
 
 internal fun readResource(resource: String) = getResourceStream(resource).use { stream ->
     ByteArrayOutputStream().use { out ->
-        val buffer = ByteArray(4096)
-        var bytesRead: Int
-        while (stream.read(buffer).also { bytesRead = it } != -1) {
-            out.write(buffer, 0, bytesRead)
-        }
+        stream.copyTo(out)
         out.toByteArray()
     }
 }
