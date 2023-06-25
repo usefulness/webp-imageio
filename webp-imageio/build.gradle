@@ -29,18 +29,9 @@ kotlin {
     explicitApi()
 }
 
-tasks.register("generateVersionProperties") {
-    def projectVersion = version
-    def propertiesFile = new File(sourceSets.main.output.resourcesDir, "webp-imageio.properties")
-    inputs.property("projectVersion", projectVersion)
-    outputs.file(propertiesFile)
-
-    doLast {
-        propertiesFile.write """
-            |webp_imageio_version = $projectVersion
-            |
-            """.strip().stripMargin()
-    }
+tasks.register("generateVersionProperties", WriteProperties) { WriteProperties props ->
+    props.destinationFile = new File(sourceSets.main.output.resourcesDir, "webp-imageio.properties")
+    props.property("webp_imageio_version", version)
 }
 
 [8, 11, 17].forEach { majorVersion ->
