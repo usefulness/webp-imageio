@@ -1,6 +1,7 @@
-name: After merge build
+name: Build project
 
 on:
+  pull_request:
   push:
     branches:
       - master
@@ -12,11 +13,17 @@ on:
   schedule:
     - cron: '0 3 * * 1,4'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+
 jobs:
   build:
-    env:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -32,19 +39,41 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: 20
+          java-version: |
+            8
+            11
+            17
+            20
 
       - uses: gradle/gradle-build-action@v2
 
-      - run: ./gradlew assemble
+      - uses: gradle/wrapper-validation-action@v1
+
+      - run: ./gradlew projectCodestyle --scan
+
+      - run: ./gradlew check --scan
+
+      - run: ./gradlew projectCoverage --scan
+
+      - run: ./gradlew publishToMavenLocal
+
+      - run: git diff --exit-code
+
+      - uses: actions/upload-artifact@v3
+        if: ${{ always() }}
+        with:
+          name: test-results-${{ matrix.os }}
+          path: "${{ github.workspace }}/**/build/reports"
 
       - name: Unwrap GPG key
+        if: github.event_name == 'push'
         env:
           GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
           SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
         run: sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
 
       - name: Publish
+        if: github.event_name == 'push'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
@@ -55,14 +84,17 @@ jobs:
         run: ./gradlew publishMavenJavaPublicationToGithubRepository
 
       - uses: actions/cache@v3
+        if: github.event_name != 'pull_request'
         name: Upload base (release)
         with:
           path: diffuse-source-file
           key: diffuse-${{ github.sha }}
 
       - run: find . -regex ".*webp-imageio/build/libs/webp-imageio-[0-9SNAPSHOT\.-]*\.jar" -print | xargs -n 1 -I % cp % diffuse-source-file
+        if: github.event_name != 'pull_request'
         shell: bash
 
       - name: Check size
+        if: github.event_name != 'pull_request'
         run: du -h diffuse-source-file
         shell: bash
