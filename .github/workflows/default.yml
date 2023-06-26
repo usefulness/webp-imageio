@@ -51,7 +51,7 @@ jobs:
 
       - run: ./gradlew projectCodestyle --scan
 
-      - run: ./gradlew check --scan
+      - run: ./gradlew assemble check --scan
 
       - run: ./gradlew projectCoverage --scan
 
@@ -64,37 +64,3 @@ jobs:
         with:
           name: test-results-${{ matrix.os }}
           path: "${{ github.workspace }}/**/build/reports"
-
-      - name: Unwrap GPG key
-        if: github.event_name == 'push'
-        env:
-          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
-          SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
-        run: sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
-
-      - name: Publish
-        if: github.event_name == 'push'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
-          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-          SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
-        run: ./gradlew publishMavenJavaPublicationToGithubRepository
-
-      - uses: actions/cache@v3
-        if: github.event_name != 'pull_request'
-        name: Upload base (release)
-        with:
-          path: diffuse-source-file
-          key: diffuse-${{ github.sha }}
-
-      - run: find . -regex ".*webp-imageio/build/libs/webp-imageio-[0-9SNAPSHOT\.-]*\.jar" -print | xargs -n 1 -I % cp % diffuse-source-file
-        if: github.event_name != 'pull_request'
-        shell: bash
-
-      - name: Check size
-        if: github.event_name != 'pull_request'
-        run: du -h diffuse-source-file
-        shell: bash
