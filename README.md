@@ -2,6 +2,7 @@
 
 [![Build](https://github.com/usefulness/webp-imageio/actions/workflows/after_merge.yml/badge.svg?branch=master)](https://github.com/usefulness/webp-imageio/actions/workflows/after_merge.yml)
 ![Maven Central](https://img.shields.io/maven-central/v/com.github.usefulness/webp-imageio)
+![Static Badge](https://img.shields.io/badge/java-8-blue)
 
 ## Description
 
