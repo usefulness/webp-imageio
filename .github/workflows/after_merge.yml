@@ -1,0 +1,68 @@
+name: Publish snapshots
+
+on:
+  push:
+    branches:
+      - master
+      - main
+      - trunk
+      - develop
+      - maine
+      - mane
+  schedule:
+    - cron: '0 3 * * 1,4'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Write Gradle build properties to `~/.gradle/gradle.properties`
+        run: |
+          mkdir -p ~/.gradle
+          printf "org.gradle.jvmargs=-Xmx3G -XX:+UseParallelGC\n" >> ~/.gradle/gradle.properties
+          printf "org.gradle.vfs.watch=false\n" >> ~/.gradle/gradle.properties
+        shell: bash
+
+      - uses: gradle/gradle-build-action@v2
+
+      - run: ./gradlew assemble
+
+      - name: Unwrap GPG key
+        if: github.event_name == 'push'
+        env:
+          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
+          SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
+        run: sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
+        shell: bash
+
+      - name: Publish
+        if: github.event_name == 'push'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
+        run: ./gradlew publishMavenJavaPublicationToGithubRepository
+
+      - uses: actions/cache@v3
+        name: Upload base (release)
+        with:
+          path: diffuse-source-file
+          key: diffuse-${{ github.sha }}
+
+      - run: find . -regex ".*webp-imageio/build/libs/webp-imageio-[0-9SNAPSHOT\.-]*\.jar" -print | xargs -n 1 -I % cp % diffuse-source-file
+        shell: bash
+
+      - name: Check size
+        run: du -h diffuse-source-file
+        shell: bash
