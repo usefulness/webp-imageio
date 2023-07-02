@@ -16,6 +16,10 @@ internal object WebPWrapper {
 
     private var NATIVE_LIBRARY_LOADED = false
 
+    init {
+        loadNativeLibrary()
+    }
+
     @JvmStatic
     @Synchronized
     fun loadNativeLibrary() {

@@ -1,5 +1,11 @@
 package com.luciad.imageio.webp
 
+import com.luciad.imageio.webp.utils.getResourceStream
+import com.luciad.imageio.webp.utils.readImage
+import com.luciad.imageio.webp.utils.readResource
+import com.luciad.imageio.webp.utils.requireWebpImageReader
+import com.luciad.imageio.webp.utils.requireWebpImageWriter
+import com.luciad.imageio.webp.utils.writeWebpImage
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
