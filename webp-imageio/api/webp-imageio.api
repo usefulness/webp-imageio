@@ -1,6 +1,7 @@
 public final class com/luciad/imageio/webp/CompressionType : java/lang/Enum {
 	public static final field Lossless Lcom/luciad/imageio/webp/CompressionType;
 	public static final field Lossy Lcom/luciad/imageio/webp/CompressionType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lcom/luciad/imageio/webp/CompressionType;
 	public static fun values ()[Lcom/luciad/imageio/webp/CompressionType;
 }
