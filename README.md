@@ -32,11 +32,46 @@ dependencies {
 
 WebP images can be decoded using default settings as follows.
 
+<details open>
+<summary>Kotlin</summary>
+
+```kotlin
+val image = ImageIO.read(File("input.webp"))
 ```
+</details>
+
+<details>
+<summary>Java</summary>
+
+```java
 BufferedImage image = ImageIO.read(new File("input.webp"));
 ```
+</details>
 
 To customize the WebP decoder settings you need to create instances of ImageReader and WebPReadParam.
+
+<details open>
+<summary>Kotlin</summary>
+
+```kotlin
+// Obtain a WebP ImageReader instance
+val reader = ImageIO.getImageReadersByMIMEType("image/webp").next()
+
+// Configure decoding parameters
+val readParam = WebPReadParam().apply {
+    bypassFiltering = true
+}
+
+// Configure the input on the ImageReader
+reader.setInput(FileImageInputStream(File("input.webp")))
+
+// Decode the image
+val image = reader.read(0, readParam)
+```
+</details>
+
+<details>
+<summary>Java</summary>
 
 ```java
 // Obtain a WebP ImageReader instance
@@ -52,6 +87,7 @@ reader.setInput(new FileImageInputStream(new File("input.webp")));
 // Decode the image
 BufferedImage image = reader.read(0, readParam);
 ```
+</details>
 
 ### Encoding
 
