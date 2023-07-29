@@ -10,6 +10,7 @@ public open class WebPWriteParam(locale: Locale?) : ImageWriteParam(locale) {
     private val defaultLossless = encoderOptions.lossless
 
     init {
+        WebPWrapper.cleaner.register(this, encoderOptions)
         canWriteCompressed = true
         compressionTypes = CompressionType.imageIoCompressionTypes
         compressionMode = MODE_EXPLICIT
@@ -32,7 +33,7 @@ public open class WebPWriteParam(locale: Locale?) : ImageWriteParam(locale) {
     }
 
     public var compressionType: CompressionType
-        get() = CompressionType.values().first { it.imageIoValue == getCompressionType() }
+        get() = CompressionType.entries.first { it.imageIoValue == getCompressionType() }
         set(value) {
             setCompressionType(value.imageIoValue)
         }
@@ -40,7 +41,7 @@ public open class WebPWriteParam(locale: Locale?) : ImageWriteParam(locale) {
     override fun setCompressionType(compressionType: String) {
         super.setCompressionType(compressionType)
 
-        encoderOptions.lossless = when (CompressionType.values().firstOrNull { it.imageIoValue == compressionType }) {
+        encoderOptions.lossless = when (CompressionType.entries.firstOrNull { it.imageIoValue == compressionType }) {
             CompressionType.Lossless -> true
             CompressionType.Lossy -> false
             null -> error("unrecognised compression type=$compressionType")

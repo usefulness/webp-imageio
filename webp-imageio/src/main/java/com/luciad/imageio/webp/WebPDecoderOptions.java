@@ -15,7 +15,7 @@
  */
 package com.luciad.imageio.webp;
 
-final class WebPDecoderOptions implements AutoCloseable {
+final class WebPDecoderOptions implements Runnable {
 
   long fPointer;
 
@@ -27,13 +27,7 @@ final class WebPDecoderOptions implements AutoCloseable {
   }
 
   @Override
-  protected void finalize() throws Throwable {
-    super.finalize();
-    close();
-  }
-
-  @Override
-  public void close() {
+  public void run() {
     deleteDecoderOptions(fPointer);
     fPointer = 0L;
   }

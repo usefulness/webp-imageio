@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/usefulness/webp-imageio/actions/workflows/after_merge.yml/badge.svg?branch=master)](https://github.com/usefulness/webp-imageio/actions/workflows/after_merge.yml)
 ![Maven Central](https://img.shields.io/maven-central/v/com.github.usefulness/webp-imageio)
-![Static Badge](https://img.shields.io/badge/java-8-blue)
+![Static Badge](https://img.shields.io/badge/java-9-blue)
 
 ## Description
 
@@ -174,4 +174,4 @@ writer.write(null, new IIOImage(image, null, null), writeParam);
 
 `webp-imageio` is distributed under the [Apache Software License](https://www.apache.org/licenses/LICENSE-2.0) version
 2.0.  
-`libwebp` binaries is distributed under the [Following License](https://chromium.googlesource.com/webm/libwebp/+/refs/tags/v1.3.0/COPYING)
+`libwebp` binaries are distributed under the [Following License](https://chromium.googlesource.com/webm/libwebp/+/refs/tags/v1.3.0/COPYING)

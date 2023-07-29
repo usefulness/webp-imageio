@@ -10,7 +10,7 @@ tasks.withType(Test).configureEach {
     useJUnitPlatform()
 }
 
-def targetJavaVersion = JavaVersion.VERSION_1_8
+def targetJavaVersion = JavaVersion.VERSION_1_9
 tasks.withType(JavaCompile).configureEach {
     options.release.set(targetJavaVersion.majorVersion.toInteger())
     options.headerOutputDirectory.set(rootProject.file("libwebp-jni/src/main/c"))
@@ -34,7 +34,7 @@ tasks.register("generateVersionProperties", WriteProperties) { WriteProperties p
     props.property("webp_imageio_version", version)
 }
 
-[8, 11, 17].forEach { majorVersion ->
+[9, 11, 17].forEach { majorVersion ->
     def jdkTest = tasks.register("testJdk$majorVersion", Test) {
         javaLauncher = javaToolchains.launcherFor {
             languageVersion = JavaLanguageVersion.of(majorVersion)
