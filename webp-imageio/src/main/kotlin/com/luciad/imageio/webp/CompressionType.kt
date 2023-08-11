@@ -7,6 +7,6 @@ public enum class CompressionType(internal val imageIoValue: String) {
 
     internal companion object {
 
-        val imageIoCompressionTypes = values().map { it.imageIoValue }.toTypedArray()
+        val imageIoCompressionTypes = entries.map { it.imageIoValue }.toTypedArray()
     }
 }

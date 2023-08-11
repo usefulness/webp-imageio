@@ -18,9 +18,12 @@ import javax.imageio.stream.MemoryCacheImageInputStream
 internal fun Iterator<ImageReader>.requireWebpImageReader() = asSequence().single { it.originatingProvider is WebPImageReaderSpi }
 internal fun Iterator<ImageWriter>.requireWebpImageWriter() = asSequence().single { it.originatingProvider is WebPImageWriterSpi }
 
-internal fun readImage(webp: ByteArray, param: ImageReadParam? = null) = getImageReader(webp)
-    .apply { input = MemoryCacheImageInputStream(ByteArrayInputStream(webp)) }
-    .read(0, param)
+internal fun readImage(webp: ByteArray, param: ImageReadParam? = null) =
+    MemoryCacheImageInputStream(ByteArrayInputStream(webp)).use { input ->
+        getImageReader(webp)
+            .apply { this.input = input }
+            .read(0, param)
+    }
 
 private fun getImageReader(data: ByteArray): ImageReader {
     val stream = MemoryCacheImageInputStream(ByteArrayInputStream(data))

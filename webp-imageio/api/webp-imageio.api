@@ -52,7 +52,7 @@ public final class com/luciad/imageio/webp/WebPReadParam : javax/imageio/ImageRe
 	public final fun setUseThreads (Z)V
 }
 
-public class com/luciad/imageio/webp/WebPWriteParam : javax/imageio/ImageWriteParam {
+public final class com/luciad/imageio/webp/WebPWriteParam : javax/imageio/ImageWriteParam {
 	public static final field Companion Lcom/luciad/imageio/webp/WebPWriteParam$Companion;
 	public static final field LOSSLESS_COMPRESSION I
 	public static final field LOSSY_COMPRESSION I
@@ -60,63 +60,63 @@ public class com/luciad/imageio/webp/WebPWriteParam : javax/imageio/ImageWritePa
 	public static final field PREPROCESSING_FILTER_PSEUDO_RANDOM_DITHERING I
 	public static final field PREPROCESSING_FILTER_SEGMENT_SMOOTH I
 	public fun <init> (Ljava/util/Locale;)V
-	public fun getAlphaCompressionAlgorithm ()I
-	public fun getAlphaFiltering ()I
-	public fun getAlphaQuality ()I
-	public fun getAutoAdjustFilterStrength ()Z
+	public final fun getAlphaCompressionAlgorithm ()I
+	public final fun getAlphaFiltering ()I
+	public final fun getAlphaQuality ()I
+	public final fun getAutoAdjustFilterStrength ()Z
 	public fun getCompressionQuality ()F
 	public final fun getCompressionType ()Lcom/luciad/imageio/webp/CompressionType;
-	public fun getEmulateJpegSize ()Z
-	public fun getEntropyAnalysisPassCount ()I
-	public fun getExact ()Z
-	public fun getFilterSharpness ()I
-	public fun getFilterStrength ()I
-	public fun getFilterType ()I
-	public fun getLowMemory ()Z
-	public fun getMethod ()I
-	public fun getNearLossless ()I
-	public fun getPartitionLimit ()I
-	public fun getPartitions ()I
-	public fun getPreprocessing ()I
-	public fun getQMax ()I
-	public fun getQMin ()I
-	public fun getSegments ()I
-	public fun getShowCompressed ()Z
-	public fun getSnsStrength ()I
-	public fun getTargetPSNR ()F
-	public fun getTargetSize ()I
-	public fun getThreadLevel ()I
-	public fun getUseDeltaPalette ()Z
-	public fun getUseSharpYUV ()Z
-	public fun setAlphaCompressionAlgorithm (I)V
-	public fun setAlphaFiltering (I)V
-	public fun setAlphaQuality (I)V
-	public fun setAutoAdjustFilterStrength (Z)V
+	public final fun getEmulateJpegSize ()Z
+	public final fun getEntropyAnalysisPassCount ()I
+	public final fun getExact ()Z
+	public final fun getFilterSharpness ()I
+	public final fun getFilterStrength ()I
+	public final fun getFilterType ()I
+	public final fun getLowMemory ()Z
+	public final fun getMethod ()I
+	public final fun getNearLossless ()I
+	public final fun getPartitionLimit ()I
+	public final fun getPartitions ()I
+	public final fun getPreprocessing ()I
+	public final fun getQMax ()I
+	public final fun getQMin ()I
+	public final fun getSegments ()I
+	public final fun getShowCompressed ()Z
+	public final fun getSnsStrength ()I
+	public final fun getTargetPSNR ()F
+	public final fun getTargetSize ()I
+	public final fun getThreadLevel ()I
+	public final fun getUseDeltaPalette ()Z
+	public final fun getUseSharpYUV ()Z
+	public final fun setAlphaCompressionAlgorithm (I)V
+	public final fun setAlphaFiltering (I)V
+	public final fun setAlphaQuality (I)V
+	public final fun setAutoAdjustFilterStrength (Z)V
 	public fun setCompressionQuality (F)V
 	public final fun setCompressionType (Lcom/luciad/imageio/webp/CompressionType;)V
 	public fun setCompressionType (Ljava/lang/String;)V
-	public fun setEmulateJpegSize (Z)V
-	public fun setEntropyAnalysisPassCount (I)V
-	public fun setExact (Z)V
-	public fun setFilterSharpness (I)V
-	public fun setFilterStrength (I)V
-	public fun setFilterType (I)V
-	public fun setLowMemory (Z)V
-	public fun setMethod (I)V
-	public fun setNearLossless (I)V
-	public fun setPartitionLimit (I)V
-	public fun setPartitions (I)V
-	public fun setPreprocessing (I)V
-	public fun setQMax (I)V
-	public fun setQMin (I)V
-	public fun setSegments (I)V
-	public fun setShowCompressed (Z)V
-	public fun setSnsStrength (I)V
-	public fun setTargetPSNR (F)V
-	public fun setTargetSize (I)V
-	public fun setThreadLevel (I)V
-	public fun setUseDeltaPalette (Z)V
-	public fun setUseSharpYUV (Z)V
+	public final fun setEmulateJpegSize (Z)V
+	public final fun setEntropyAnalysisPassCount (I)V
+	public final fun setExact (Z)V
+	public final fun setFilterSharpness (I)V
+	public final fun setFilterStrength (I)V
+	public final fun setFilterType (I)V
+	public final fun setLowMemory (Z)V
+	public final fun setMethod (I)V
+	public final fun setNearLossless (I)V
+	public final fun setPartitionLimit (I)V
+	public final fun setPartitions (I)V
+	public final fun setPreprocessing (I)V
+	public final fun setQMax (I)V
+	public final fun setQMin (I)V
+	public final fun setSegments (I)V
+	public final fun setShowCompressed (Z)V
+	public final fun setSnsStrength (I)V
+	public final fun setTargetPSNR (F)V
+	public final fun setTargetSize (I)V
+	public final fun setThreadLevel (I)V
+	public final fun setUseDeltaPalette (Z)V
+	public final fun setUseSharpYUV (Z)V
 	public fun unsetCompression ()V
 }
 

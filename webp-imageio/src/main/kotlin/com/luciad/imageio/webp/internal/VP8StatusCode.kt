@@ -13,6 +13,6 @@ internal enum class VP8StatusCode {
 
     companion object {
 
-        fun getStatusCode(aValue: Int) = values().getOrNull(aValue)
+        fun getStatusCode(aValue: Int) = entries.getOrNull(aValue)
     }
 }
