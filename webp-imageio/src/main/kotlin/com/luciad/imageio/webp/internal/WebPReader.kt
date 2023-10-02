@@ -24,6 +24,7 @@ import java.awt.image.DirectColorModel
 import java.awt.image.WritableRaster
 import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.lang.IndexOutOfBoundsException
 import java.util.Hashtable
 import javax.imageio.ImageReadParam
 import javax.imageio.ImageReader
@@ -87,7 +88,9 @@ internal class WebPReader(originatingProvider: ImageReaderSpi) : ImageReader(ori
     }
 
     private fun checkIndex(imageIndex: Int) {
-        require(imageIndex == 0) { "Invalid image index: $imageIndex" }
+        if (imageIndex != 0) {
+            throw IndexOutOfBoundsException("Invalid image index")
+        }
     }
 
     override fun getWidth(imageIndex: Int): Int {
