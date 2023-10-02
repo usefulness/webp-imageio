@@ -25,7 +25,7 @@ internal fun readImage(webp: ByteArray, param: ImageReadParam? = null) =
             .read(0, param)
     }
 
-private fun getImageReader(data: ByteArray): ImageReader {
+internal fun getImageReader(data: ByteArray): ImageReader {
     val stream = MemoryCacheImageInputStream(ByteArrayInputStream(data))
 
     return ImageIO.getImageReaders(stream).requireWebpImageReader()
