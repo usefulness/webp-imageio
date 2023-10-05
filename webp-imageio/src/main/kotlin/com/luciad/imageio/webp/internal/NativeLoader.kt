@@ -79,9 +79,8 @@ internal object NativeLoader {
         val tempFolder = tempDir.absolutePath
         val dir = File(tempFolder)
 
-        dir.walkBottomUp()
-            .filter { it.name.startsWith("webp-imageio-$version") && !it.name.endsWith(".lck") }
-            .forEach { nativeLibFile ->
+        dir.listFiles { _, name -> name.startsWith("webp-imageio-$version") && !name.endsWith(".lck") }
+            ?.forEach { nativeLibFile ->
                 val lckFile = File(nativeLibFile.absolutePath + ".lck")
                 if (!lckFile.exists()) {
                     try {
