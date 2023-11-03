@@ -34,6 +34,7 @@ internal object OsInfo {
     private const val PPC = "ppc"
     private const val PPC64 = "ppc64"
 
+    @Suppress("ktlint:standard:discouraged-comment-location")
     private val archMapping = mapOf(
         // x86 mappings
         X86 to X86,
@@ -70,6 +71,8 @@ internal object OsInfo {
         "powerpc64" to PPC64,
         "power_pc64" to PPC64,
         "power_rs64" to PPC64,
+        "ppc64el" to PPC64,
+        "ppc64le" to PPC64,
     )
 
     @JvmStatic

@@ -21,26 +21,27 @@ import javax.imageio.ImageReader
 import javax.imageio.spi.ImageReaderSpi
 import javax.imageio.stream.ImageInputStream
 
-public open class WebPImageReaderSpi : ImageReaderSpi(
-    "Luciad",
-    "1.0",
-    arrayOf("WebP", "webp"),
-    arrayOf("webp"),
-    arrayOf("image/webp"),
-    WebPReader::class.java.name,
-    arrayOf<Class<*>>(ImageInputStream::class.java),
-    arrayOf(WebPImageWriterSpi::class.java.name),
-    false,
-    null,
-    null,
-    null,
-    null,
-    false,
-    null,
-    null,
-    null,
-    null,
-) {
+public open class WebPImageReaderSpi :
+    ImageReaderSpi(
+        "Luciad",
+        "1.0",
+        arrayOf("WebP", "webp"),
+        arrayOf("webp"),
+        arrayOf("image/webp"),
+        WebPReader::class.java.name,
+        arrayOf<Class<*>>(ImageInputStream::class.java),
+        arrayOf(WebPImageWriterSpi::class.java.name),
+        false,
+        null,
+        null,
+        null,
+        null,
+        false,
+        null,
+        null,
+        null,
+        null,
+    ) {
     override fun createReaderInstance(extension: Any?): ImageReader = WebPReader(this)
 
     override fun canDecodeInput(source: Any?): Boolean {
