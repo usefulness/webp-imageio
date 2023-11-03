@@ -26,26 +26,27 @@ import javax.imageio.ImageWriter
 import javax.imageio.spi.ImageWriterSpi
 import javax.imageio.stream.ImageOutputStream
 
-public open class WebPImageWriterSpi : ImageWriterSpi(
-    "Luciad",
-    "1.0",
-    arrayOf("WebP", "webp"),
-    arrayOf("webp"),
-    arrayOf("image/webp"),
-    WebPReader::class.java.name,
-    arrayOf<Class<*>>(ImageOutputStream::class.java),
-    arrayOf(WebPImageReaderSpi::class.java.name),
-    false,
-    null,
-    null,
-    null,
-    null,
-    false,
-    null,
-    null,
-    null,
-    null,
-) {
+public open class WebPImageWriterSpi :
+    ImageWriterSpi(
+        "Luciad",
+        "1.0",
+        arrayOf("WebP", "webp"),
+        arrayOf("webp"),
+        arrayOf("image/webp"),
+        WebPReader::class.java.name,
+        arrayOf<Class<*>>(ImageOutputStream::class.java),
+        arrayOf(WebPImageReaderSpi::class.java.name),
+        false,
+        null,
+        null,
+        null,
+        null,
+        false,
+        null,
+        null,
+        null,
+        null,
+    ) {
 
     override fun canEncodeImage(type: ImageTypeSpecifier): Boolean {
         val colorModel = type.colorModel
