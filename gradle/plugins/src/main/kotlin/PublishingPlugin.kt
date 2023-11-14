@@ -70,7 +70,7 @@ class PublishingPlugin : Plugin<Project> {
                         pom.url.set("https://github.com/usefulness/webp-imageio")
                         pom.licenses { licenses ->
                             licenses.license { license ->
-                                license.name.set("The Apache License, Version 2.0")
+                                license.name.set("Apache-2.0")
                                 license.url.set("https://github.com/usefulness/webp-imageio/blob/master/LICENSE")
                             }
                         }
