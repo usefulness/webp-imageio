@@ -1,6 +1,6 @@
 [versions]
 gradle-starter = "0.66.0"
-gradle-doctor = "0.9.0"
+gradle-doctor = "0.9.1"
 maven-junit = "5.10.1"
 maven-assertj = "3.24.2"
 maven-commons = "2.15.0"
