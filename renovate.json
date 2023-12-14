@@ -1,5 +1,6 @@
 {
   "includeForks": true,
+  "platformAutomerge": true,
   "assignees": [
     "mateuszkwiecinski"
   ],
