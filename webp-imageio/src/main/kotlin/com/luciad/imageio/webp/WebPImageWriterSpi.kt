@@ -67,10 +67,6 @@ public open class WebPImageWriterSpi :
                 return false
             }
         }
-        val colorSpace = colorModel.colorSpace
-        if (!colorSpace.isCS_sRGB) {
-            return false
-        }
         val sampleSize = sampleModel.sampleSize
         for (i in sampleSize.indices) {
             if (sampleSize[i] > 8) {
