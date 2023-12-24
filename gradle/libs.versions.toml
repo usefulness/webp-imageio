@@ -3,16 +3,14 @@ gradle-starter = "0.67.0"
 gradle-doctor = "0.9.1"
 maven-junit = "5.10.1"
 maven-assertj = "3.24.2"
-maven-commons = "2.15.1"
 maven-binarycompatiblity = "0.13.2"
 maven-dokka = "1.9.10"
 
 [libraries]
-kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "maven-junit" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "maven-junit" }
+junit-jupiter-platform = { module = "org.junit.platform:junit-platform-launcher" }
 assertj-core = { module = "org.assertj:assertj-core", version.ref = "maven-assertj" }
-commons-io = { module = "commons-io:commons-io", version.ref = "maven-commons" }
 jetbrains-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "maven-dokka" }
 
 [plugins]

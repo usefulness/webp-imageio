@@ -58,5 +58,6 @@ tasks.named("processResources") {
 dependencies {
     testImplementation(libs.assertj.core)
     testRuntimeOnly(libs.junit.jupiter.engine)
+    testRuntimeOnly(libs.junit.jupiter.platform)
     testImplementation(libs.junit.jupiter.api)
 }
