@@ -8,6 +8,8 @@ import com.luciad.imageio.webp.utils.requireWebpImageWriter
 import com.luciad.imageio.webp.utils.writeWebpImage
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.condition.DisabledOnJre
+import org.junit.jupiter.api.condition.JRE
 import org.junit.jupiter.api.io.TempDir
 import java.awt.image.BufferedImage
 import java.awt.image.DataBufferInt
@@ -81,6 +83,25 @@ class WebPTest {
 
         assertThat(image.width).isEqualTo(400)
         assertThat(image.height).isEqualTo(301)
+    }
+
+    @Test
+    @DisabledOnJre(JRE.JAVA_9) // for some reason Java 9 can't read JPEGs with indexed colors
+    fun nonRgbColorSpace(@TempDir tempDir: Path) {
+        val inputImage1 = ImageIO.read(readResource("non_rgb_1.jpg").inputStream())
+        val inputImage2 = ImageIO.read(readResource("non_rgb_2.jpeg").inputStream())
+        val outputFile1 = tempDir.resolve("out_1.webp").toFile()
+        val outputFile2 = tempDir.resolve("out_2.webp").toFile()
+
+        ImageIO.write(inputImage1, "webp", outputFile1).let(::check)
+        ImageIO.write(inputImage2, "webp", outputFile2).let(::check)
+        val outputImage1 = readImage(webp = outputFile1.readBytes())
+        val outputImage2 = readImage(webp = outputFile2.readBytes())
+
+        assertThat(outputImage1.width).isEqualTo(500)
+        assertThat(outputImage1.height).isEqualTo(333)
+        assertThat(outputImage2.width).isEqualTo(1000)
+        assertThat(outputImage2.height).isEqualTo(1000)
     }
 
     @Test

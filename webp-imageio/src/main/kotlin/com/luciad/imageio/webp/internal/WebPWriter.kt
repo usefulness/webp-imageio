@@ -97,7 +97,8 @@ internal class WebPWriter(originatingProvider: ImageWriterSpi?) : ImageWriter(or
             val width = aRi.width
             val height = aRi.height
             val colorModel = aRi.colorModel
-            return if (colorModel is ComponentColorModel) {
+            val colorSpace = colorModel.colorSpace
+            return if (colorSpace.isCS_sRGB && colorModel is ComponentColorModel) {
                 val sampleModel = aRi.sampleModel as ComponentSampleModel
                 when (sampleModel.transferType) {
                     DataBuffer.TYPE_BYTE -> extractComponentRGBByte(
@@ -116,7 +117,7 @@ internal class WebPWriter(originatingProvider: ImageWriterSpi?) : ImageWriter(or
 
                     else -> throw IOException("Incompatible image: $aRi")
                 }
-            } else if (colorModel is DirectColorModel) {
+            } else if (colorSpace.isCS_sRGB && colorModel is DirectColorModel) {
                 val sampleModel = aRi.sampleModel as SinglePixelPackedSampleModel
                 val type = sampleModel.transferType
                 if (type == DataBuffer.TYPE_INT) {
