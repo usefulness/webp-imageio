@@ -81,9 +81,7 @@ internal class WebPWriter(originatingProvider: ImageWriterSpi?) : ImageWriter(or
             }
         }
 
-        private fun hasTranslucency(aRi: RenderedImage): Boolean {
-            return aRi.colorModel.hasAlpha()
-        }
+        private fun hasTranslucency(aRi: RenderedImage): Boolean = aRi.colorModel.hasAlpha()
 
         private fun getShift(aMask: Int): Int {
             var shift = 0
