@@ -34,7 +34,7 @@ internal object OsInfo {
     private const val PPC = "ppc"
     private const val PPC64 = "ppc64"
 
-    @Suppress("ktlint:standard:discouraged-comment-location")
+    @Suppress("ktlint:standard:value-argument-comment")
     private val archMapping = mapOf(
         // x86 mappings
         X86 to X86,
