@@ -54,7 +54,7 @@ jobs:
           SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
         run: ./gradlew publishMavenJavaPublicationToGithubRepository
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         name: Upload base (release)
         with:
           path: diffuse-source-file

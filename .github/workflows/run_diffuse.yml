@@ -52,7 +52,7 @@ jobs:
         run: du -h pull-request-artifact.jar
         shell: bash
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         name: Download base
         with:
           path: |
