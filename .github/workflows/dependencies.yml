@@ -43,7 +43,7 @@ jobs:
 
       - id: dependency-diff
         name: Generate dependency diff
-        uses: usefulness/dependency-tree-diff-action@v1
+        uses: usefulness/dependency-tree-diff-action@v2
         with:
           project: 'webp-imageio'
           configuration: runtimeClasspath
