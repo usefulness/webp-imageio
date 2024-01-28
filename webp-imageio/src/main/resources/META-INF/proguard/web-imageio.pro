@@ -1,0 +1,3 @@
+-keep class com.luciad.imageio.webp.WebP { *; }
+-keep class com.luciad.imageio.webp.WebPImageWriterSpi { *; }
+-keep class com.luciad.imageio.webp.WebPImageReaderSpi { *; }
