@@ -45,7 +45,7 @@ jobs:
             17
             21
 
-      - uses: gradle/gradle-build-action@v3
+      - uses: gradle/actions/setup-gradle@v3
 
       - uses: gradle/wrapper-validation-action@v1
 
@@ -64,3 +64,28 @@ jobs:
         with:
           name: test-results-${{ matrix.os }}
           path: "${{ github.workspace }}/**/build/reports"
+
+  test-obfuscataion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Write Gradle build properties to `~/.gradle/gradle.properties`
+        run: |
+          mkdir -p ~/.gradle
+          printf "org.gradle.jvmargs=-Xmx3G -XX:+UseParallelGC\n" >> ~/.gradle/gradle.properties
+          printf "org.gradle.vfs.watch=false\n" >> ~/.gradle/gradle.properties
+        shell: bash
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v3
+
+      - run: cd testing && ./gradlew assemble
+
+      - run: java -jar testing/proguard/build/libs/proguard-r8.jar
