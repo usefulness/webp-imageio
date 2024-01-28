@@ -1,0 +1,62 @@
+plugins {
+    alias(libs.plugins.starter.library.kotlin)
+    id "application"
+    alias(libs.plugins.johnrengelman.shadow)
+}
+
+application {
+    mainClass.set("com.webp.imageio.testing.Main")
+}
+
+configurations {
+    r8
+}
+
+def r8File = layout.buildDirectory.file("libs/${project.name}-r8.jar").get().asFile
+def rulesFile = project.file("rules.pro")
+def r8JarProvider = tasks.register('r8Jar', JavaExec) { task ->
+    task.javaLauncher.set(javaToolchains.launcherFor { spec ->
+        spec.languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_11.majorVersion))
+    })
+    def fatJar = shadowJar
+    def fatJarFile = fatJar.archiveFile
+    task.dependsOn(fatJar)
+    task.inputs.file(fatJarFile)
+    task.inputs.file(rulesFile)
+    task.outputs.file(r8File)
+
+    task.classpath(configurations.r8)
+    task.mainClass.set('com.android.tools.r8.R8')
+    task.args = [
+            '--release',
+            '--classfile',
+            '--output', r8File.toString(),
+            '--pg-conf', rulesFile.path,
+            '--lib', providers.systemProperty('java.home').get(),
+            fatJarFile.get().toString(),
+    ]
+}
+artifacts {
+    archives file: r8File, name: 'binary', type: 'jar', builtBy: r8JarProvider, classifier: 'diffuse'
+}
+
+tasks.named("shadowJar") {
+    exclude '**/*.kotlin_metadata'
+    exclude '**/*.kotlin_module'
+    exclude '**/*.kotlin_builtins'
+    exclude '**/module-info.class'
+    exclude 'META-INF/maven/**'
+    exclude 'META-INF/*.version'
+    exclude '**/*.proto'
+    exclude '**/*.dex'
+    exclude 'LICENSE'
+    exclude 'NOTICE'
+    exclude 'r8-version.properties'
+    exclude 'migrateToAndroidx/*'
+    exclude 'DebugProbesKt.bin'
+}
+
+dependencies {
+    r8(libs.r8.core)
+    runtimeOnly("com.github.usefulness:webp-imageio")
+}

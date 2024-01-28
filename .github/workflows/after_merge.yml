@@ -31,7 +31,7 @@ jobs:
           printf "org.gradle.vfs.watch=false\n" >> ~/.gradle/gradle.properties
         shell: bash
 
-      - uses: gradle/gradle-build-action@v3
+      - uses: gradle/actions/setup-gradle@v3
 
       - run: ./gradlew assemble
 
