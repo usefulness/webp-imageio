@@ -170,6 +170,11 @@ writer.write(null, new IIOImage(image, null, null), writeParam);
 ```
 </details>
 
+## R8 / ProGuard
+If you are using R8 the shrinking and obfuscation rules are included automatically.
+
+ProGuard users must manually add the options from [webp-imageio.pro](https://github.com/usefulness/webp-imageio/blob/master/webp-imageio/src/main/resources/META-INF/proguard/web-imageio.pro)
+
 ## License
 
 `webp-imageio` is distributed under the [Apache Software License](https://www.apache.org/licenses/LICENSE-2.0) version
