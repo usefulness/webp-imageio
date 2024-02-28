@@ -1,6 +1,6 @@
 [versions]
 gradle-starter = "0.70.1"
-gradle-doctor = "0.9.1"
+gradle-doctor = "0.9.2"
 gradle-johnrengelman-shadow = "8.1.1"
 maven-junit = "5.10.2"
 maven-assertj = "3.25.3"
