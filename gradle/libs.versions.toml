@@ -5,7 +5,7 @@ gradle-johnrengelman-shadow = "8.1.1"
 maven-junit = "5.10.2"
 maven-assertj = "3.25.3"
 maven-binarycompatiblity = "0.14.0"
-maven-dokka = "1.9.10"
+maven-dokka = "1.9.20"
 google-r8 = "8.2.47"
 
 [libraries]
