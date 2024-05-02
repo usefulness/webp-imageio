@@ -40,7 +40,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: |
-            9
             11
             17
             21
