@@ -116,6 +116,7 @@ internal object OsInfo {
             val armType = hardwareName
 
             // armType (uname -m) can be armv5t, armv5te, armv5tej, armv5tejl, armv6, armv7, armv7l, aarch64, i686
+            @Suppress("ktlint:standard:blank-line-between-when-conditions")
             when {
                 armType.startsWith("armv6") -> return "armv6" // Raspberry PI
                 armType.startsWith("armv7l") -> return "armv7l"
