@@ -6,4 +6,5 @@ plugins {
 
 commonConfig {
     javaFilesAllowed true
+    javaVersion = JavaVersion.VERSION_1_9
 }

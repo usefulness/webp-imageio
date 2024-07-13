@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
-
 plugins {
     alias(libs.plugins.starter.library.kotlin)
     id("com.starter.publishing")
@@ -10,13 +8,8 @@ tasks.withType(Test).configureEach {
     useJUnitPlatform()
 }
 
-def targetJavaVersion = JavaVersion.VERSION_1_9
 tasks.withType(JavaCompile).configureEach {
-    options.release.set(targetJavaVersion.majorVersion.toInteger())
     options.headerOutputDirectory.set(rootProject.file("libwebp-jni/src/main/c"))
-}
-tasks.withType(KotlinCompile).configureEach {
-    kotlinOptions.jvmTarget = targetJavaVersion
 }
 tasks.withType(Javadoc).configureEach {
     failOnError = false
@@ -34,7 +27,7 @@ tasks.register("generateVersionProperties", WriteProperties) { WriteProperties p
     props.property("webp_imageio_version", version)
 }
 
-[9, 11, 17].forEach { majorVersion ->
+[11, 17].forEach { majorVersion ->
     def jdkTest = tasks.register("testJdk$majorVersion", Test) {
         javaLauncher = javaToolchains.launcherFor {
             languageVersion = JavaLanguageVersion.of(majorVersion)
