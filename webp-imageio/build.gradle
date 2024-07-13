@@ -27,7 +27,7 @@ tasks.register("generateVersionProperties", WriteProperties) { WriteProperties p
     props.property("webp_imageio_version", version)
 }
 
-[9, 11, 17].forEach { majorVersion ->
+[11, 17].forEach { majorVersion ->
     def jdkTest = tasks.register("testJdk$majorVersion", Test) {
         javaLauncher = javaToolchains.launcherFor {
             languageVersion = JavaLanguageVersion.of(majorVersion)
