@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/usefulness/webp-imageio/actions/workflows/after_merge.yml/badge.svg?branch=master)](https://github.com/usefulness/webp-imageio/actions/workflows/after_merge.yml)
 ![Maven Central](https://img.shields.io/maven-central/v/com.github.usefulness/webp-imageio)
-![Static Badge](https://img.shields.io/badge/java-9-blue)
+![Static Badge](https://img.shields.io/badge/java_compatibility-11-blue)
 
 ## Description
 
@@ -12,7 +12,7 @@
 ### Highlights:
 - `macos-aarch64` architecture support (ARM chipsets from Apple, M1, M2) ✅
 - Sharp YUV option support ✅
-- Written in Kotlin
+- Written in Kotlin, compatible with Java
 
 ### Supported platforms
 
