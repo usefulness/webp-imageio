@@ -35,7 +35,7 @@ jobs:
 
       - run: git status
 
-      - uses: peter-evans/create-pull-request@v6
+      - uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.PUBLIC_REPO_TOKEN }}
           commit-message: "Build libwebp binaries. version ${{ inputs.libwebp_ref }}"
