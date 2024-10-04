@@ -2,7 +2,7 @@
 gradle-starter = "0.77.0"
 gradle-doctor = "0.10.0"
 gradle-johnrengelman-shadow = "8.1.1"
-maven-junit = "5.11.1"
+maven-junit = "5.11.2"
 maven-assertj = "3.26.3"
 maven-binarycompatiblity = "0.16.3"
 maven-dokka = "1.9.20"
