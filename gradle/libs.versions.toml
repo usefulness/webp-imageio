@@ -1,5 +1,5 @@
 [versions]
-gradle-starter = "0.80.0"
+gradle-starter = "0.81.0"
 gradle-doctor = "0.10.0"
 gradle-johnrengelman-shadow = "8.1.1"
 maven-junit = "5.11.4"
