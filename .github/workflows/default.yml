@@ -64,7 +64,7 @@ jobs:
           name: test-results-${{ matrix.os }}
           path: "${{ github.workspace }}/**/build/reports"
 
-  test-obfuscataion:
+  test-obfuscation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
