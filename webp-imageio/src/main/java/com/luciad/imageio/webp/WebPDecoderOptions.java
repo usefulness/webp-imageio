@@ -15,11 +15,9 @@
  */
 package com.luciad.imageio.webp;
 
-import java.lang.ref.Cleaner;
+import static com.luciad.imageio.webp.WebPCleaner.cleaner;
 
 final class WebPDecoderOptions implements Runnable {
-
-  static private final Cleaner cleaner  = Cleaner.create();
 
   long fPointer;
 
