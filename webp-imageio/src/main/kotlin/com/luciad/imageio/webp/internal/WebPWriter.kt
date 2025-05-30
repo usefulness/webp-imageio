@@ -62,22 +62,13 @@ internal class WebPWriter(originatingProvider: ImageWriterSpi?) : ImageWriter(or
     companion object {
 
         private fun encode(options: WebPEncoderOptions, image: RenderedImage): ByteArray {
-            // This prevents the JVM/GC from attempting to GC (during periods of high load) when it no longer sees any of the
-            // variables being referred to any further, despite the underlying WebP library directly using them.
-            // https://bitbucket.org/luciad/webp-imageio/pull-requests/3/prevent-webpencoderoptionss-finalizer/diff
-            val encoderThreadLocal = ThreadLocal<WebPEncoderOptions>()
-            return try {
-                encoderThreadLocal.set(options)
-                val encodeAlpha = hasTranslucency(image)
-                if (encodeAlpha) {
-                    val rgbaData = getRGBA(image)
-                    WebPWrapper.encodeRGBA(options, rgbaData, image.width, image.height, image.width * 4)
-                } else {
-                    val rgbData = getRGB(image)
-                    WebPWrapper.encodeRGB(options, rgbData, image.width, image.height, image.width * 3)
-                }
-            } finally {
-                encoderThreadLocal.remove()
+            val encodeAlpha = hasTranslucency(image)
+            return if (encodeAlpha) {
+                val rgbaData = getRGBA(image)
+                WebPWrapper.encodeRGBA(options, rgbaData, image.width, image.height, image.width * 4)
+            } else {
+                val rgbData = getRGB(image)
+                WebPWrapper.encodeRGB(options, rgbData, image.width, image.height, image.width * 3)
             }
         }
 
