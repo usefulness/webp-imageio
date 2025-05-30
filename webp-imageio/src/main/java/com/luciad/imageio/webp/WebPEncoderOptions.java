@@ -15,7 +15,6 @@
  */
 package com.luciad.imageio.webp;
 
-import static com.luciad.imageio.webp.WebPCleaner.cleaner;
 
 final class WebPEncoderOptions implements Runnable {
 
@@ -25,9 +24,9 @@ final class WebPEncoderOptions implements Runnable {
     fPointer = createConfig();
     if (fPointer == 0) {
       throw new OutOfMemoryError();
-    } else {
-      cleaner.register(this,this);
     }
+
+    WebPWrapper.cleaner.register(this, this);
   }
 
   @Override

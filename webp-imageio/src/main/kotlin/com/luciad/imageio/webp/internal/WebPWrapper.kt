@@ -10,11 +10,15 @@ import com.luciad.imageio.webp.WebP.getInfo
 import com.luciad.imageio.webp.internal.NativeLoader.initialize
 import com.luciad.imageio.webp.internal.VP8StatusCode
 import java.io.IOException
+import java.lang.ref.Cleaner
 import java.nio.ByteOrder
 
 internal object WebPWrapper {
 
     private var NATIVE_LIBRARY_LOADED = false
+
+    @JvmField
+    val cleaner: Cleaner = Cleaner.create()
 
     init {
         loadNativeLibrary()
