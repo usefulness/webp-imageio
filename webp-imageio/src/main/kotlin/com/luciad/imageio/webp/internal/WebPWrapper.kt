@@ -17,6 +17,7 @@ internal object WebPWrapper {
 
     private var NATIVE_LIBRARY_LOADED = false
 
+    @JvmField
     val cleaner: Cleaner = Cleaner.create()
 
     init {

@@ -15,6 +15,7 @@
  */
 package com.luciad.imageio.webp;
 
+
 final class WebPDecoderOptions implements Runnable {
 
   long fPointer;
@@ -24,6 +25,8 @@ final class WebPDecoderOptions implements Runnable {
     if (fPointer == 0) {
       throw new OutOfMemoryError();
     }
+
+    WebPWrapper.cleaner.register(this, this);
   }
 
   @Override

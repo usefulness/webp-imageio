@@ -15,15 +15,18 @@
  */
 package com.luciad.imageio.webp;
 
+
 final class WebPEncoderOptions implements Runnable {
 
-  long fPointer;
+  private long fPointer;
 
   public WebPEncoderOptions() {
     fPointer = createConfig();
     if (fPointer == 0) {
       throw new OutOfMemoryError();
     }
+
+    WebPWrapper.cleaner.register(this, this);
   }
 
   @Override
