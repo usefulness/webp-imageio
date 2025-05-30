@@ -7,10 +7,6 @@ public class WebPReadParam : ImageReadParam() {
 
     internal val decoderOptions = WebPDecoderOptions()
 
-    init {
-        WebPWrapper.cleaner.register(decoderOptions, decoderOptions)
-    }
-
     /**
      * if true, skip the in-loop filtering
      */

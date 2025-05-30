@@ -15,7 +15,11 @@
  */
 package com.luciad.imageio.webp;
 
+import java.lang.ref.Cleaner;
+
 final class WebPDecoderOptions implements Runnable {
+
+  static private final Cleaner cleaner  = Cleaner.create();
 
   long fPointer;
 
@@ -23,6 +27,8 @@ final class WebPDecoderOptions implements Runnable {
     fPointer = createDecoderOptions();
     if (fPointer == 0) {
       throw new OutOfMemoryError();
+    } else {
+      cleaner.register(this,this);
     }
   }
 

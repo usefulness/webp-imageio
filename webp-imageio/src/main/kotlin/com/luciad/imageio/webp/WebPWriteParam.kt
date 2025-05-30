@@ -10,7 +10,6 @@ public class WebPWriteParam(locale: Locale?) : ImageWriteParam(locale) {
     private val defaultLossless = encoderOptions.lossless
 
     init {
-        WebPWrapper.cleaner.register(encoderOptions, encoderOptions)
         canWriteCompressed = true
         compressionTypes = CompressionType.imageIoCompressionTypes
         compressionMode = MODE_EXPLICIT

@@ -15,14 +15,20 @@
  */
 package com.luciad.imageio.webp;
 
+import java.lang.ref.Cleaner;
+
 final class WebPEncoderOptions implements Runnable {
 
-  long fPointer;
+  static private final Cleaner cleaner  = Cleaner.create();
+
+  private long fPointer;
 
   public WebPEncoderOptions() {
     fPointer = createConfig();
     if (fPointer == 0) {
       throw new OutOfMemoryError();
+    } else {
+      cleaner.register(this,this);
     }
   }
 
