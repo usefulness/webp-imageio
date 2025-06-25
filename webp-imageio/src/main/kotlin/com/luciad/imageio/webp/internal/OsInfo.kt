@@ -98,12 +98,16 @@ internal object OsInfo {
     private val isAlpine: Boolean
         get() {
             return runCatching {
-                val (_, osReleaseOutput) = runProcess("cat /etc/os-release | grep ^ID")
-
-                osReleaseOutput.contains("alpine", ignoreCase = true)
-            }
-                .getOrDefault(false)
-        }
+                val osReleaseFile = File("/etc/os-release")
+                if (osReleaseFile.exists() && osReleaseFile.canRead()) {
+                    osReleaseFile.readLines()
+                        .filter { it.startsWith("ID=") }
+                        .any { it.contains("alpine", ignoreCase = true) }
+                } else {
+                    false
+                }
+            }.getOrDefault(false)
+    }
 
     @Suppress("TooGenericExceptionCaught")
     private val hardwareName: String
