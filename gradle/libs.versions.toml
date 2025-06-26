@@ -4,7 +4,7 @@ gradle-doctor = "0.11.0"
 gradle-johnrengelman-shadow = "8.1.1"
 maven-junit = "5.13.2"
 maven-assertj = "3.27.3"
-maven-binarycompatiblity = "0.17.0"
+maven-binarycompatiblity = "0.18.0"
 maven-dokka = "2.0.0"
 google-r8 = "8.7.18"
 
