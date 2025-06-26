@@ -107,7 +107,7 @@ internal object OsInfo {
                     false
                 }
             }.getOrDefault(false)
-    }
+        }
 
     @Suppress("TooGenericExceptionCaught")
     private val hardwareName: String
