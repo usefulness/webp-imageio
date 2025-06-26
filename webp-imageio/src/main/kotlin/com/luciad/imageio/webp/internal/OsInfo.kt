@@ -24,6 +24,7 @@
 // --------------------------------------
 package com.luciad.imageio.webp.internal
 
+import java.io.File
 import java.io.IOException
 
 internal object OsInfo {
