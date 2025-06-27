@@ -49,7 +49,7 @@ class PublishingPlugin : Plugin<Project> {
                 }
                 maven { maven ->
                     maven.name = "mavenCentral"
-                    maven.setUrl("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+                    maven.setUrl("https://central.sonatype.com/api/v1/publisher/upload")
                     maven.mavenContent { it.releasesOnly() }
                     with(maven.credentials) {
                         username = findConfig("OSSRH_USERNAME")
@@ -58,7 +58,7 @@ class PublishingPlugin : Plugin<Project> {
                 }
                 maven { maven ->
                     maven.name = "mavenCentralSnapshot"
-                    maven.setUrl("https://oss.sonatype.org/content/repositories/snapshots")
+                    maven.setUrl("https://central.sonatype.com/repository/maven-snapshots/")
                     maven.mavenContent { it.snapshotsOnly() }
                     with(maven.credentials) {
                         username = findConfig("OSSRH_USERNAME")
