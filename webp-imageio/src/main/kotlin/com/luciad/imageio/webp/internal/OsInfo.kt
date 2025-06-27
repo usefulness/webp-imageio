@@ -24,6 +24,7 @@
 // --------------------------------------
 package com.luciad.imageio.webp.internal
 
+import java.io.File
 import java.io.IOException
 
 internal object OsInfo {
@@ -96,14 +97,17 @@ internal object OsInfo {
         get() = findProperty("java.runtime.name").orEmpty().lowercase().contains("android")
 
     private val isAlpine: Boolean
-        get() {
-            return runCatching {
-                val (_, osReleaseOutput) = runProcess("cat /etc/os-release | grep ^ID")
-
-                osReleaseOutput.contains("alpine", ignoreCase = true)
+        get() = runCatching {
+            val osReleaseFile = File("/etc/os-release")
+            if (osReleaseFile.exists() && osReleaseFile.canRead()) {
+                osReleaseFile.useLines { lines ->
+                    lines.any { it.startsWith("ID=") && it.contains("alpine", ignoreCase = true) }
+                }
+            } else {
+                false
             }
-                .getOrDefault(false)
         }
+            .getOrDefault(false)
 
     @Suppress("TooGenericExceptionCaught")
     private val hardwareName: String
