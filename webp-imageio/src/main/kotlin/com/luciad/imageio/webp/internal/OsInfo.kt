@@ -97,18 +97,17 @@ internal object OsInfo {
         get() = findProperty("java.runtime.name").orEmpty().lowercase().contains("android")
 
     private val isAlpine: Boolean
-        get() {
-            return runCatching {
-                val osReleaseFile = File("/etc/os-release")
-                if (osReleaseFile.exists() && osReleaseFile.canRead()) {
-                    osReleaseFile.readLines()
-                        .filter { it.startsWith("ID=") }
-                        .any { it.contains("alpine", ignoreCase = true) }
-                } else {
-                    false
+        get() = runCatching {
+            val osReleaseFile = File("/etc/os-release")
+            if (osReleaseFile.exists() && osReleaseFile.canRead()) {
+                osReleaseFile.useLines { lines ->
+                    lines.any { it.startsWith("ID=") && it.contains("alpine", ignoreCase = true) }
                 }
-            }.getOrDefault(false)
+            } else {
+                false
+            }
         }
+            .getOrDefault(false)
 
     @Suppress("TooGenericExceptionCaught")
     private val hardwareName: String
