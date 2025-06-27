@@ -25,7 +25,7 @@ class PublishingPlugin : Plugin<Project> {
 
         extensions.configure<MavenPublishBaseExtension> {
             publishToMavenCentral()
-            coordinates(rootProject.name, name, version.toString())
+            coordinates(group.toString(), name, version.toString())
 
             signAllPublications()
 
