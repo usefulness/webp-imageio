@@ -7,6 +7,7 @@ maven-assertj = "3.27.3"
 maven-binarycompatiblity = "0.18.0"
 maven-dokka = "2.0.0"
 google-r8 = "8.7.18"
+maven-vanniktech-maven-publish = "0.33.0"
 
 [libraries]
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "maven-junit" }
@@ -15,6 +16,7 @@ junit-jupiter-platform = { module = "org.junit.platform:junit-platform-launcher"
 assertj-core = { module = "org.assertj:assertj-core", version.ref = "maven-assertj" }
 jetbrains-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "maven-dokka" }
 r8-core = { module = "com.android.tools:r8", version.ref = "google-r8" }
+vanniktech-maven-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "maven-vanniktech-maven-publish" }
 
 [plugins]
 starter-config = { id = "com.starter.config", version.ref = "gradle-starter" }

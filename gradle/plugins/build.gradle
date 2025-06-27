@@ -18,6 +18,6 @@ gradlePlugin {
 }
 
 dependencies {
-    implementation("com.vanniktech:gradle-maven-publish-plugin:0.33.0")
+    implementation(libs.vanniktech.maven.publish)
     implementation(libs.jetbrains.dokka)
 }
