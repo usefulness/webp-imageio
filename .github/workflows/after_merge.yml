@@ -40,24 +40,14 @@ jobs:
 
       - run: ./gradlew assemble
 
-      - name: Unwrap GPG key
-        if: github.event_name == 'push'
-        env:
-          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
-          SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
-        run: sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
-        shell: bash
-
       - name: Publish
         if: github.event_name == 'push'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME_FOR_COM_GITHUB }}
-          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD_FOR_COM_GITHUB }}
-          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
-          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-          SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
-        run: ./gradlew publishMavenJavaPublicationToGithubRepository publishMavenJavaPublicationToMavenCentralSnapshotRepository
+          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_KEY_ID }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY_CONTENTS }}
+        run: ./gradlew publishAllPublicationsToGithubRepository --no-configuration-cache
 
       - uses: actions/cache@v4
         name: Upload base (release)
