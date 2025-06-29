@@ -12,10 +12,6 @@ class PublishingPlugin : Plugin<Project> {
         pluginManager.apply("com.vanniktech.maven.publish")
         pluginManager.apply("org.jetbrains.dokka")
 
-        tasks.withType(DokkaTask::class.java).configureEach { dokkaTask ->
-            dokkaTask.notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
-        }
-
         pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
             tasks.named("processResources", ProcessResources::class.java) { processResources ->
                 processResources.from(rootProject.file("NOTICE"))
