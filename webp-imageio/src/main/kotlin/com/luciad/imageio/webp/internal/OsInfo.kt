@@ -188,9 +188,8 @@ internal object OsInfo {
     private fun translateOSNameToFolderName(osName: String) = when {
         osName.contains("Windows") -> "Windows"
         osName.contains("Mac") || osName.contains("Darwin") -> "Mac"
-        isAlpine -> "Linux-Alpine"
+        isAlpine -> "Linux"
         osName.contains("Linux") -> "Linux"
-        osName.contains("AIX") -> "AIX"
         else -> osName.replace("\\W".toRegex(), "")
     }
 
