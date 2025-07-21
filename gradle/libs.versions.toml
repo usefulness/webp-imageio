@@ -6,7 +6,7 @@ maven-junit = "5.13.4"
 maven-assertj = "3.27.3"
 maven-binarycompatiblity = "0.18.1"
 maven-dokka = "2.0.0"
-google-r8 = "8.7.18"
+google-r8 = "8.11.18"
 maven-vanniktech-maven-publish = "0.34.0"
 
 [libraries]
