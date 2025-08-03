@@ -43,7 +43,7 @@ jobs:
             11
             17
             21
-            23
+            24
 
       - uses: gradle/actions/wrapper-validation@v4
 
