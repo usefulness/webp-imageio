@@ -18,7 +18,7 @@ tasks.withType(Javadoc).configureEach {
     }
 }
 kotlin {
-    jvmToolchain(23)
+    jvmToolchain(24)
     explicitApi()
 }
 

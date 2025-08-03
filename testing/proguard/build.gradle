@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.starter.library.kotlin)
     id "application"
-    alias(libs.plugins.johnrengelman.shadow)
+    alias(libs.plugins.gradleup.shadow)
 }
 
 application {
@@ -9,7 +9,7 @@ application {
 }
 
 configurations {
-    r8
+    register("r8")
 }
 
 def r8File = layout.buildDirectory.file("libs/${project.name}-r8.jar").get().asFile
