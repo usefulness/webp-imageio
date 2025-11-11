@@ -7,7 +7,7 @@ maven-assertj = "3.27.6"
 maven-binarycompatiblity = "0.18.1"
 maven-dokka = "2.1.0"
 google-r8 = "8.7.18"
-maven-vanniktech-maven-publish = "0.34.0"
+maven-vanniktech-maven-publish = "0.35.0"
 
 [libraries]
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "maven-junit" }
