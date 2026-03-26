@@ -5,7 +5,7 @@ gradle-gradleup-shadow = "9.4.0"
 maven-junit = "5.14.3"
 maven-assertj = "3.27.7"
 maven-binarycompatiblity = "0.18.1"
-maven-dokka = "2.1.0"
+maven-dokka = "2.2.0"
 google-r8 = "9.1.31"
 maven-vanniktech-maven-publish = "0.36.0"
 
