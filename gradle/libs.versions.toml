@@ -1,7 +1,7 @@
 [versions]
 gradle-starter = "0.94.0"
 gradle-doctor = "0.12.1"
-gradle-gradleup-shadow = "9.4.0"
+gradle-gradleup-shadow = "9.4.1"
 maven-junit = "5.14.3"
 maven-assertj = "3.27.7"
 maven-binarycompatiblity = "0.18.1"
