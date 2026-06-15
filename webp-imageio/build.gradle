@@ -8,6 +8,14 @@ tasks.withType(Test).configureEach {
     useJUnitPlatform()
 }
 
+// JUnit 6 requires a JVM 17 runtime. The library itself targets Java 9, but the test
+// classpath must advertise JVM 17 so variant-aware resolution accepts the JUnit 6 artifacts.
+[configurations.testCompileClasspath, configurations.testRuntimeClasspath].each { config ->
+    config.attributes {
+        attribute(org.gradle.api.attributes.java.TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 17)
+    }
+}
+
 tasks.withType(JavaCompile).configureEach {
     options.headerOutputDirectory.set(rootProject.file("libwebp-jni/src/main/c"))
 }
@@ -27,7 +35,7 @@ tasks.register("generateVersionProperties", WriteProperties) { WriteProperties p
     props.property("webp_imageio_version", version)
 }
 
-[11, 17, 21].forEach { majorVersion ->
+[17, 21].forEach { majorVersion ->
     def jdkTest = tasks.register("testJdk$majorVersion", Test) {
         javaLauncher = javaToolchains.launcherFor {
             languageVersion = JavaLanguageVersion.of(majorVersion)
