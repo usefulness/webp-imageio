@@ -9,7 +9,7 @@ df -H
 ./dockcross/dockcross-linux-armv6-lts bash -c './compile.sh Linux armv6'
 ./dockcross/dockcross-linux-armv7-lts bash -c './compile.sh Linux armv7'
 ./dockcross/dockcross-linux-arm64-lts bash -c './compile.sh Linux aarch64'
-./dockcross/dockcross-manylinux-x86 bash -c './compile.sh Linux x86'
+./dockcross/dockcross-linux-x86 bash -c './compile.sh Linux x86'
 ./dockcross/dockcross-manylinux-x64 bash -c './compile.sh Linux x86_64'
 ./dockcross/dockcross-linux-ppc64le bash -c './compile.sh Linux ppc64'
 
