@@ -1,5 +1,5 @@
 [versions]
-java-compilation = "24"
+java-compilation = "27"
 gradle-starter = "0.100.0"
 gradle-doctor = "0.12.1"
 gradle-gradleup-shadow = "9.6.1"
