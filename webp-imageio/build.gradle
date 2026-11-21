@@ -17,7 +17,7 @@ tasks.withType(Test).configureEach {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.headerOutputDirectory.set(rootProject.file("libwebp-jni/src/main/c"))
+    options.headerOutputDirectory.set(isolated.rootProject.projectDirectory.dir("libwebp-jni/src/main/c"))
 }
 tasks.withType(Javadoc).configureEach {
     failOnError = false

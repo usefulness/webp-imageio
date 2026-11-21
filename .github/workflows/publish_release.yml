@@ -38,7 +38,7 @@ jobs:
       - run: ./gradlew assemble
 
       - name: Publish to Maven Central
-        run: ./gradlew publishAllPublicationsToMavenCentralRepository --no-configuration-cache
+        run: ./gradlew publishAllPublicationsToMavenCentralRepository
 
       - name: Publish to Github Package Registry
-        run: ./gradlew publishAllPublicationsToGithubRepository --no-configuration-cache
+        run: ./gradlew publishAllPublicationsToGithubRepository

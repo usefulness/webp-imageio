@@ -47,7 +47,7 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_KEY_ID }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY_CONTENTS }}
-        run: ./gradlew publishAllPublicationsToGithubRepository --no-configuration-cache
+        run: ./gradlew publishAllPublicationsToGithubRepository
 
       - uses: actions/cache@v6
         name: Upload base (release)
