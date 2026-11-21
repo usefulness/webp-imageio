@@ -5,7 +5,7 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(24)
+    jvmToolchain(libs.versions.java.compilation.get().toInteger())
 }
 
 gradlePlugin {
